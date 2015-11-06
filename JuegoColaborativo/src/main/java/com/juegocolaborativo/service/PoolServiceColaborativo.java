@@ -3,9 +3,6 @@ package com.juegocolaborativo.service;
 /**
  * Created by Dario on 27/01/14.
  */
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.app.Service;
 import android.content.Intent;
@@ -13,11 +10,9 @@ import android.os.Handler;
 import android.os.IBinder;
 
 import com.juegocolaborativo.JuegoColaborativo;
-import com.juegocolaborativo.soap.SoapManager;
-import com.juegocolaborativo.task.WSTask;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PoolServiceColaborativo extends Service {
 

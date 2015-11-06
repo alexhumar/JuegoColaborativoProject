@@ -20,11 +20,14 @@ android {
     }
 }
 
+repositories {
+    //mavenCentral()
+    //maven { url 'http://ksoap2-android.googlecode.com/svn/m2-repo' }
+    maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
+}
+
 dependencies {
-    //compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided files('libs/model.jar')
-    provided files('libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar')
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.google.android.gms:play-services:4.0.30'
-    //compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.google.code.ksoap2-android:ksoap2-android:3.6.0'
 }

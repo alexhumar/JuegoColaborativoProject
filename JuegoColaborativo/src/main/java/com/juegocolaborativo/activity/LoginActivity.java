@@ -6,30 +6,27 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
+import com.juegocolaborativo.model.Coordenada;
+import com.juegocolaborativo.model.Grupo;
+import com.juegocolaborativo.model.Poi;
+import com.juegocolaborativo.model.Posta;
+import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
 
-import org.ksoap2.serialization.SoapObject;
-
-import java.util.ArrayList;
-
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
-import model.Coordenada;
-import model.Grupo;
-import model.Poi;
-import model.Posta;
-import model.Subgrupo;
+import java.util.ArrayList;
 
 public class LoginActivity extends DefaultActivity {
 

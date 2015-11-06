@@ -3,8 +3,10 @@ package com.juegocolaborativo.fragment;
 /**
  * Created by Matias on 28/04/14.
  */
+
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
 import com.juegocolaborativo.R;
 
 public class PrefsFragment extends PreferenceFragment {

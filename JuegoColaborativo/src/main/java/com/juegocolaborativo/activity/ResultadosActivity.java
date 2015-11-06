@@ -1,35 +1,22 @@
 package com.juegocolaborativo.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
 import com.juegocolaborativo.adapter.ResultadoItemAdapter;
 import com.juegocolaborativo.adapter.ResultadoItemSubgrupoAdapter;
-import com.juegocolaborativo.soap.SoapManager;
-import com.juegocolaborativo.task.WSTask;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
+import com.juegocolaborativo.model.Resultado;
+import com.juegocolaborativo.model.ResultadoFinal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
-import model.Resultado;
-import model.ResultadoFinal;
 
 public class ResultadosActivity extends DefaultActivity {
 

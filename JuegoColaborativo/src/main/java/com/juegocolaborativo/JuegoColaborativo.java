@@ -5,12 +5,20 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.juegocolaborativo.activity.DefaultActivity;
-import com.juegocolaborativo.activity.MapActivity;
 import com.juegocolaborativo.activity.PiezaActivity;
 import com.juegocolaborativo.activity.ResponderActivity;
 import com.juegocolaborativo.activity.ResultadosActivity;
-import com.juegocolaborativo.service.PoolServiceEstados;
+import com.juegocolaborativo.model.Consigna;
+import com.juegocolaborativo.model.Consulta;
+import com.juegocolaborativo.model.Coordenada;
+import com.juegocolaborativo.model.PiezaARecolectar;
+import com.juegocolaborativo.model.Poi;
+import com.juegocolaborativo.model.Respuesta;
+import com.juegocolaborativo.model.Resultado;
+import com.juegocolaborativo.model.ResultadoFinal;
+import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.service.PoolServiceColaborativo;
+import com.juegocolaborativo.service.PoolServiceEstados;
 import com.juegocolaborativo.service.PoolServicePosta;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
@@ -23,16 +31,6 @@ import org.ksoap2.serialization.SoapPrimitive;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
-
-import model.Consigna;
-import model.Coordenada;
-import model.PiezaARecolectar;
-import model.Poi;
-import model.Respuesta;
-import model.Resultado;
-import model.ResultadoFinal;
-import model.Subgrupo;
-import model.Consulta;
 
 /**
  * Created by Dario on 04/01/14.

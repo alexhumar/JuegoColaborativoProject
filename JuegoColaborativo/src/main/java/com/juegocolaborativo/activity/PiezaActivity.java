@@ -1,23 +1,20 @@
 package com.juegocolaborativo.activity;
 
-import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
+import com.juegocolaborativo.model.Respuesta;
+import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.service.PoolServiceRespuestas;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
@@ -28,9 +25,6 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import model.Respuesta;
-import model.Subgrupo;
 
 public class PiezaActivity extends DefaultActivity {
 

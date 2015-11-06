@@ -1,38 +1,19 @@
 package com.juegocolaborativo.activity;
 
-import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
 import com.juegocolaborativo.adapter.ResultadosAdapter;
-import com.juegocolaborativo.service.PoolServiceRespuestas;
-import com.juegocolaborativo.soap.SoapManager;
-import com.juegocolaborativo.task.WSTask;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.ksoap2.serialization.SoapObject;
+import com.juegocolaborativo.model.Respuesta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import model.Respuesta;
-import model.Subgrupo;
 
 public class RespuestasActivity extends DefaultActivity {
 

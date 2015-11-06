@@ -28,16 +28,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
+import com.juegocolaborativo.model.Poi;
+import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.receiver.ProximityIntentReceiver;
 
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-
 import java.util.HashMap;
-
-import model.PiezaARecolectar;
-import model.Poi;
-import model.Subgrupo;
 
 public class MapActivity extends DefaultActivity implements
         GooglePlayServicesClient.ConnectionCallbacks,

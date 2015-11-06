@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.juegocolaborativo.R;
+import com.juegocolaborativo.model.Respuesta;
 
 import java.util.ArrayList;
-
-import model.Respuesta;
 
 /**
  * Created by mapezteguia on 21/02/14.

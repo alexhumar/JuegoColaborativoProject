@@ -10,8 +10,7 @@ import android.view.MenuItem;
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
 import com.juegocolaborativo.adapter.ResultadosAdapter;
-
-import model.PiezaARecolectar;
+import com.juegocolaborativo.model.PiezaARecolectar;
 
 /**
  * Created by drapetti on 18/12/13.

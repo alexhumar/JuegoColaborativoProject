@@ -1,7 +1,6 @@
 package com.juegocolaborativo.receiver;
 
 import android.content.BroadcastReceiver;
-
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -9,6 +8,7 @@ import android.util.Log;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.activity.MapActivity;
+import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.service.PoolServiceEstados;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
@@ -16,12 +16,8 @@ import com.juegocolaborativo.task.WSTask;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
 
 import java.util.ArrayList;
-
-import model.Consigna;
-import model.Subgrupo;
 
 public class ProximityIntentReceiver extends BroadcastReceiver {
 

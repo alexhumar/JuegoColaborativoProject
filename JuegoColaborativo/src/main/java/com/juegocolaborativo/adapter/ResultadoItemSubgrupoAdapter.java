@@ -9,13 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.juegocolaborativo.R;
+import com.juegocolaborativo.model.Resultado;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
-
-import model.Resultado;
-import model.ResultadoFinal;
 
 /**
  * Created by Dario on 25/03/14.

@@ -1,7 +1,5 @@
 package com.juegocolaborativo.http;
 
-import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -15,7 +13,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.json.JSONObject;
 
-
+import java.util.List;
 
 public class HTTPManager {
 	private String url; 

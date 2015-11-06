@@ -33,10 +33,10 @@ public class SoapManager {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JuegoColaborativo.getInstance());
         //String server = preferences.getString("serverURL", "http://192.168.0.1");
-        String server = preferences.getString("serverURL", "http://192.168.0.21");
+        String server = preferences.getString("serverURL", "http://192.168.1.111");
         String port = preferences.getString("serverPort", "80");
 
-        this.setNamespace(server + ":" + port + "/sfjuco/web/app_dev.php/soap/services");
+        this.setNamespace(server + ":" + port + "/sfjuco/web/app_dev.php/ws/web_services");
 
         //this.setUrl(this.getNamespace() + "WSJuegoColaborativo.php?wsdl");
         this.setUrl(this.getNamespace() + "?wsdl");
