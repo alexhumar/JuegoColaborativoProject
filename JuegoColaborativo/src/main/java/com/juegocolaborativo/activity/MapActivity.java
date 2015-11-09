@@ -232,7 +232,7 @@ public class MapActivity extends DefaultActivity implements
 
             Subgrupo subgrupo = ((JuegoColaborativo) getApplication()).getSubgrupo();
 
-            if(!subgrupo.getPosta().getPiezaARecolectar().isVisitada()){
+            if(subgrupo.getPosta().getPiezaARecolectar() == null || !subgrupo.getPosta().getPiezaARecolectar().isVisitada()){
                 // Mostramos el punto correspondiente a la posta del subgrupo
                 Poi poiSubgrupo = subgrupo.getPosta().getPoi();
                 addProximityAlert(poiSubgrupo, PROX_ALERT_POI_SUBGRUPO, 0);

@@ -123,7 +123,7 @@ public class Subgrupo {
 	}
 	
 	public void setPosta(Posta posta) {
-		this.posta.setSubgrupo(null);
+		if (this.posta != null) this.posta.setSubgrupo(null);
 		this.posta = posta;
 		if (posta != null) posta.setSubgrupo(this);
 	}
