@@ -123,7 +123,8 @@ public class PiezaActivity extends DefaultActivity {
                             String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
 
                             nameValuePairs.add(new BasicNameValuePair("idSubgrupo", Integer.toString(idSubgrupo)));
-                            nameValuePairs.add(new BasicNameValuePair("idPieza", Integer.toString(idPieza)));
+                            //Ya no es necesario mandarle la pieza, tiene una sola.
+                            //nameValuePairs.add(new BasicNameValuePair("idPieza", Integer.toString(idPieza)));
                             nameValuePairs.add(new BasicNameValuePair("cumple", Integer.toString(cumple)));
                             nameValuePairs.add(new BasicNameValuePair("justificacion", justificacion));
                             nameValuePairs.add(new BasicNameValuePair("decisionFinal", Integer.toString(decisionFinal)));

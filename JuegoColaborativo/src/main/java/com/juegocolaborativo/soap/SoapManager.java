@@ -17,7 +17,7 @@ public class SoapManager {
     public static final String METHOD_PUNTO_INICIAL = "getPuntoInicial";
     public static final String METHOD_CAMBIAR_ESTADO_SUBGRUPO = "cambiarEstadoSubgrupo";
     public static final String METHOD_GET_PIEZA_A_RECOLECTAR = "getPieza";
-    public static final String METHOD_DECISION_TOMADA = "decisionTomada";
+    public static final String METHOD_DECISION_TOMADA = "tomarDecision";
     public static final String METHOD_ESPERAR_ESTADO_SUBGRUPOS = "esperarEstadoSubgrupos";
     public static final String METHOD_EXISTE_PREGUNTA_SIN_RESPONDER = "existePreguntaSinResponder";
     public static final String METHOD_EXISTEN_RESPUESTAS = "existenRespuestas";
