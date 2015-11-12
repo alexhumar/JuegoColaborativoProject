@@ -5,9 +5,6 @@ import android.preference.PreferenceManager;
 
 import com.juegocolaborativo.JuegoColaborativo;
 
-/**
- * Created by Dario on 12/12/13.
- */
 public class SoapManager {
 
     private String namespace;
@@ -36,7 +33,7 @@ public class SoapManager {
         String server = preferences.getString("serverURL", "http://192.168.1.111");
         String port = preferences.getString("serverPort", "80");
 
-        this.setNamespace(server + ":" + port + "/app_dev.php/ws/web_services");
+        this.setNamespace(server + ":" + port + "/sfjuco/web/app_dev.php/ws/web_services");
 
         //this.setUrl(this.getNamespace() + "WSJuegoColaborativo.php?wsdl");
         this.setUrl(this.getNamespace() + "?wsdl");

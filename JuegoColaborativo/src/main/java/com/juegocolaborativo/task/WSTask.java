@@ -9,11 +9,13 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.transport.HttpTransportSE;
 import org.apache.http.NameValuePair;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.lang.Object;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
@@ -24,7 +26,14 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
     private String errorCallback = null;
     private Boolean primitive = true;
     private String methodName = null;
-    private ArrayList<NameValuePair> parameters = null;
+
+    public WSTask() {
+        super();
+        this.setParameters(new ArrayList<PropertyInfo>());
+    }
+
+    //private ArrayList<NameValuePair> parameters = null;
+    private ArrayList<PropertyInfo> parameters = null;
 
     public Object getReferer() {
         return referer;
@@ -50,11 +59,19 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
         this.errorCallback = errorCallback;
     }
 
-    public ArrayList<NameValuePair> getParameters() {
+    /*public ArrayList<NameValuePair> getParameters() {
+        return parameters;
+    }*/
+
+    public ArrayList<PropertyInfo> getParameters() {
         return parameters;
     }
 
-    public void setParameters(ArrayList<NameValuePair> parameters) {
+    /*public void setParameters(ArrayList<NameValuePair> parameters) {
+        this.parameters = parameters;
+    }*/
+
+    public void setParameters(ArrayList<PropertyInfo> parameters) {
         this.parameters = parameters;
     }
 
@@ -66,9 +83,25 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
         this.methodName = method_name;
     }
 
-    public Boolean getPrimitive() {        return primitive;    }
+    public Boolean getPrimitive() { return primitive; }
 
-    public void setPrimitive(Boolean primitive) {        this.primitive = primitive;    }
+    public void setPrimitive(Boolean primitive) { this.primitive = primitive; }
+
+    private void addParameter(String name, Object value, Object type) {
+        PropertyInfo pi = new PropertyInfo();
+        pi.setName(name);
+        pi.setValue(value);
+        pi.setType(type);
+        this.getParameters().add(pi);
+    }
+
+    public void addStringParameter(String name, Object value) {
+        this.addParameter(name, value, /*PropertyInfo.STRING_CLASS*/PropertyInfo.OBJECT_CLASS);
+    }
+
+    public void addIntegerParameter(String name, Object value) {
+        this.addParameter(name, value, PropertyInfo.INTEGER_CLASS);
+    }
 
     protected SoapObject doInBackground(Void... params) {
 
@@ -79,29 +112,28 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
             SoapObject request = new SoapObject(soapManager.getNamespace(), this.getMethodName());
 
             // Paso parametros al WS
-            for(NameValuePair parameter : this.getParameters()) {
+            /*for(NameValuePair parameter : this.getParameters()) {
                 request.addProperty(parameter.getName(), parameter.getValue());
+            }*/
+            for(PropertyInfo parameter : this.getParameters()) {
+                request.addProperty(parameter);
+                //request.addProperty(parameter.getName(), parameter.getValue());
             }
 
-            // Modelo el Sobre
-            SoapSerializationEnvelope sobre = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-            sobre.setOutputSoapObject(request);
-            //sobre.env = "http://schemas.xmlsoap.org/soap/envelope"; //Alex - Prueba
+            // Modelo el Envelope (envoltura)
+            SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+            envelope.setOutputSoapObject(request);
 
             // Modelo el transporte
             HttpTransportSE transporte = new HttpTransportSE(soapManager.getUrl());
 
-            transporte.debug = true; //Alex - prueba
-
             // Llamada
             String theCall = soapManager.getNamespace() + "#" + this.getMethodName(); //Alex - prueba
-            transporte.call(theCall, sobre);
-
-            Log.d("WS Prueba",transporte.responseDump); //Alex - prueba
+            transporte.call(theCall, envelope);
 
             // Resultado
             SoapObject resultado;
-            resultado = (SoapObject) sobre.getResponse();
+            resultado = (SoapObject) envelope.getResponse();
 
             return resultado;
 

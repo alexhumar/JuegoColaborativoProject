@@ -21,8 +21,6 @@ import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 
@@ -78,21 +76,18 @@ public class LoginActivity extends DefaultActivity {
 
                             ((LoginActivity) getActivity()).showProgressDialog("Verificando");
 
-                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                            //ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 
                             //obtengo el subgrupo de la vista
-                            String subgrupo = ((TextView) rootView.findViewById(R.id.subgrupo)).getText().toString();
+                            String nombreSubgrupo = ((TextView) rootView.findViewById(R.id.subgrupo)).getText().toString();
                             //password por ahora no utilizamos
                             //String password = ((TextView) rootView.findViewById(R.id.password)).getText().toString();
-
-                            //los agrego para pasarlos como parametro
-                            nameValuePairs.add(new BasicNameValuePair("subgrupo", subgrupo));
 
                             //instancio la clase que ejecuta el web service
                             WSTask loginTask = new WSTask();
                             loginTask.setReferer(getActivity());
                             loginTask.setMethodName(SoapManager.METHOD_LOGIN);
-                            loginTask.setParameters(nameValuePairs);
+                            loginTask.addStringParameter("nombreSubgrupo", nombreSubgrupo);
                             loginTask.executeTask("completeLoginTask", "errorLoginTask");
                         }
 
@@ -118,15 +113,11 @@ public class LoginActivity extends DefaultActivity {
 
             this.showProgressDialog("Obteniendo el punto a visitar");
 
-            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-
-            nameValuePairs.add(new BasicNameValuePair("idSubgrupo", res.toString()));
-
-            WSTask loginTask = new WSTask();
-            loginTask.setReferer(this);
-            loginTask.setMethodName(SoapManager.METHOD_PUNTO_INICIAL);
-            loginTask.setParameters(nameValuePairs);
-            loginTask.executeTask("completePuntoInicial", "errorLoginTask");
+            WSTask puntoInicialTask = new WSTask();
+            puntoInicialTask.setReferer(this);
+            puntoInicialTask.setMethodName(SoapManager.METHOD_PUNTO_INICIAL);
+            puntoInicialTask.addStringParameter("idSubgrupo", res.toString());
+            puntoInicialTask.executeTask("completePuntoInicial", "errorLoginTask");
         }
     }
 
@@ -144,12 +135,12 @@ public class LoginActivity extends DefaultActivity {
         Posta postaSubgrupo = new Posta(postaSiguiente,poiSubgrupo);
         ((JuegoColaborativo) getApplication()).getSubgrupo().setPosta(postaSubgrupo);
 
-        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-        nameValuePairs.add(new BasicNameValuePair("idSubgrupo", Integer.toString(((JuegoColaborativo) getApplication()).getSubgrupo().getId())));
+        String idSubgrupo = Integer.toString(((JuegoColaborativo) getApplication()).getSubgrupo().getId());
+
         WSTask subgruposTask = new WSTask();
         subgruposTask.setReferer(this);
         subgruposTask.setMethodName(SoapManager.METHOD_GET_SUBGRUPOS);
-        subgruposTask.setParameters(nameValuePairs);
+        subgruposTask.addStringParameter("idSubgrupo", idSubgrupo);
         subgruposTask.executeTask("completeGetSubgrupos", "errorGetSubgrupos");
     }
 

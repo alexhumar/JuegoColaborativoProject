@@ -13,11 +13,7 @@ import com.juegocolaborativo.service.PoolServiceEstados;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
-
-import java.util.ArrayList;
 
 public class ProximityIntentReceiver extends BroadcastReceiver {
 
@@ -35,17 +31,17 @@ public class ProximityIntentReceiver extends BroadcastReceiver {
                 //el subgrupo avisa que ya llego a su poi y está en condiciones de comenzar el juego
                 Subgrupo subgrupo = this.getApplication().getSubgrupo();
 
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("idSubgrupo", Integer.toString(subgrupo.getId())));
                 subgrupo.setEstado(Subgrupo.ESTADO_INICIAL);
-                nameValuePairs.add(new BasicNameValuePair("idEstado", Integer.toString(subgrupo.getEstado())));
+                String idSubgrupo = Integer.toString(subgrupo.getId());
+                String idEstado = Integer.toString(subgrupo.getEstado());
 
                 //Ejecuto la tarea que cambia de estado al subgrupo
-                WSTask setJugandoTask = new WSTask();
-                setJugandoTask.setReferer(this);
-                setJugandoTask.setMethodName(SoapManager.METHOD_CAMBIAR_ESTADO_SUBGRUPO);
-                setJugandoTask.setParameters(nameValuePairs);
-                setJugandoTask.executeTask("completeCambiarEstadoSubgrupo", "errorCambiarEstadoSubgrupo");
+                WSTask cambiarEstadoSubgrupoTask = new WSTask();
+                cambiarEstadoSubgrupoTask.setReferer(this);
+                cambiarEstadoSubgrupoTask.setMethodName(SoapManager.METHOD_CAMBIAR_ESTADO_SUBGRUPO);
+                cambiarEstadoSubgrupoTask.addStringParameter("idSubgrupo", idSubgrupo);
+                cambiarEstadoSubgrupoTask.addStringParameter("idEstado", idEstado);
+                cambiarEstadoSubgrupoTask.executeTask("completeCambiarEstadoSubgrupo", "errorCambiarEstadoSubgrupo");
 
             } else if(intent.getAction() == MapActivity.PROX_ALERT_POI_SIGUIENTE){
                 //avisa que ya llego al poi siguiente

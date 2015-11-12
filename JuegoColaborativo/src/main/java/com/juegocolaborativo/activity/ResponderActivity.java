@@ -15,11 +15,7 @@ import com.juegocolaborativo.R;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
-
-import java.util.ArrayList;
 
 public class ResponderActivity extends DefaultActivity {
 
@@ -34,7 +30,6 @@ public class ResponderActivity extends DefaultActivity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,24 +87,20 @@ public class ResponderActivity extends DefaultActivity {
 
                                 ((ResponderActivity) getActivity()).showProgressDialog("Enviando respuesta");
 
-                                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-
                                 int idConsulta = app.getSubgrupo().getConsultaActual().getId();
                                 int acuerdo = respuesta.isChecked() ? 1 : 0;
                                 String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
 
                                 app.getSubgrupo().getConsultaActual().setRespondida(1);
 
-                                nameValuePairs.add(new BasicNameValuePair("idConsulta", Integer.toString(idConsulta)));
-                                nameValuePairs.add(new BasicNameValuePair("idSubgrupoConsultado", Integer.toString(app.getSubgrupo().getConsultaActual().getId())));
-                                nameValuePairs.add(new BasicNameValuePair("acuerdo", Integer.toString(acuerdo)));
-                                nameValuePairs.add(new BasicNameValuePair("justificacion", justificacion));
-
-                                WSTask decisionTask = new WSTask();
-                                decisionTask.setReferer(getActivity());
-                                decisionTask.setMethodName(SoapManager.METHOD_GUARDAR_RESPUESTA);
-                                decisionTask.setParameters(nameValuePairs);
-                                decisionTask.executeTask("completeGuardarRespuesta", "errorGuardarRespuesta");
+                                WSTask guardarRespuestaTask = new WSTask();
+                                guardarRespuestaTask.setReferer(getActivity());
+                                guardarRespuestaTask.setMethodName(SoapManager.METHOD_GUARDAR_RESPUESTA);
+                                guardarRespuestaTask.addStringParameter("idConsulta", Integer.toString(idConsulta));
+                                guardarRespuestaTask.addStringParameter("idSubgrupoConsultado", Integer.toString(app.getSubgrupo().getConsultaActual().getId()));
+                                guardarRespuestaTask.addStringParameter("acuerdo", Integer.toString(acuerdo));
+                                guardarRespuestaTask.addStringParameter("justificacion", justificacion);
+                                guardarRespuestaTask.executeTask("completeGuardarRespuesta", "errorGuardarRespuesta");
 
                                 getActivity().finish();
                             }
