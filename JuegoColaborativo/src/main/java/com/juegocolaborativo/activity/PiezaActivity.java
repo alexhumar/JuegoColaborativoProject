@@ -19,11 +19,8 @@ import com.juegocolaborativo.service.PoolServiceRespuestas;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.ksoap2.serialization.SoapObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PiezaActivity extends DefaultActivity {
@@ -114,41 +111,34 @@ public class PiezaActivity extends DefaultActivity {
 
                             ((PiezaActivity) getActivity()).showProgressDialog("Enviando respuesta");
 
-                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
-
                             int idSubgrupo = app.getSubgrupo().getId();
                             int idPieza = app.getPiezaActual().getId();
                             int cumple = respuesta.isChecked() ? 1 : 0;
                             int decisionFinal = 1;
                             String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
 
-                            nameValuePairs.add(new BasicNameValuePair("idSubgrupo", Integer.toString(idSubgrupo)));
-                            nameValuePairs.add(new BasicNameValuePair("idPieza", Integer.toString(idPieza)));
-                            nameValuePairs.add(new BasicNameValuePair("cumple", Integer.toString(cumple)));
-                            nameValuePairs.add(new BasicNameValuePair("justificacion", justificacion));
-                            nameValuePairs.add(new BasicNameValuePair("decisionFinal", Integer.toString(decisionFinal)));
-
                             WSTask decisionTask = new WSTask();
                             decisionTask.setReferer(getActivity());
                             decisionTask.setMethodName(SoapManager.METHOD_DECISION_TOMADA);
-                            decisionTask.setParameters(nameValuePairs);
+                            decisionTask.addStringParameter("idSubgrupo", Integer.toString(idSubgrupo));
+                            decisionTask.addStringParameter("idPieza", Integer.toString(idPieza));
+                            decisionTask.addStringParameter("cumple", Integer.toString(cumple));
+                            decisionTask.addStringParameter("justificacion", justificacion);
+                            decisionTask.addStringParameter("decisionFinal", Integer.toString(decisionFinal));
                             decisionTask.executeTask("completeDecisionTomada", "errorDecisionTomadaTask");
                         }
-
                     }
                 }
-
-
             );
 
             buttonConsultar.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if(((TextView) rootView.findViewById(R.id.justificacion)).getText().toString().trim().length() == 0){
-                                Toast toast = Toast.makeText(rootView.getContext(), "Por favor, ingrese la justificación de su respuesta", Toast.LENGTH_SHORT);
-                                toast.show();
-                            } else {
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(((TextView) rootView.findViewById(R.id.justificacion)).getText().toString().trim().length() == 0){
+                            Toast toast = Toast.makeText(rootView.getContext(), "Por favor, ingrese la justificación de su respuesta", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
                             JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
                             //seteo el flag del subgrupo esperando rta para mostrar o no el boton
                             buttonConsultar.setVisibility(View.INVISIBLE);
@@ -158,28 +148,24 @@ public class PiezaActivity extends DefaultActivity {
 
                             ((PiezaActivity) getActivity()).showProgressDialog("Enviando consulta");
 
-                            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
-
                             int idSubgrupo = app.getSubgrupo().getId();
                             int idPieza = app.getPiezaActual().getId();
                             int cumple = respuesta.isChecked() ? 1 : 0;
                             int decisionFinal = 0;
                             String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
 
-                            nameValuePairs.add(new BasicNameValuePair("idSubgrupo", Integer.toString(idSubgrupo)));
-                            nameValuePairs.add(new BasicNameValuePair("idPieza", Integer.toString(idPieza)));
-                            nameValuePairs.add(new BasicNameValuePair("cumple", Integer.toString(cumple)));
-                            nameValuePairs.add(new BasicNameValuePair("justificacion", justificacion));
-                            nameValuePairs.add(new BasicNameValuePair("decisionFinal", Integer.toString(decisionFinal)));
-
                             WSTask decisionTask = new WSTask();
                             decisionTask.setReferer(getActivity());
                             decisionTask.setMethodName(SoapManager.METHOD_DECISION_TOMADA);
-                            decisionTask.setParameters(nameValuePairs);
+                            decisionTask.addStringParameter("idSubgrupo", Integer.toString(idSubgrupo));
+                            decisionTask.addStringParameter("idPieza", Integer.toString(idPieza));
+                            decisionTask.addStringParameter("cumple", Integer.toString(cumple));
+                            decisionTask.addStringParameter("justificacion", justificacion);
+                            decisionTask.addStringParameter("decisionFinal", Integer.toString(decisionFinal));
                             decisionTask.executeTask("completeConsultaEnviada", "errorConsultaEnviada");
                         }
-                        }
                     }
+                }
             );
 
             buttonRespuestas.setOnClickListener(

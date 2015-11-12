@@ -41,7 +41,6 @@ public class LoginActivity extends DefaultActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -76,8 +75,6 @@ public class LoginActivity extends DefaultActivity {
 
                             ((LoginActivity) getActivity()).showProgressDialog("Verificando");
 
-                            //ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-
                             //obtengo el subgrupo de la vista
                             String nombreSubgrupo = ((TextView) rootView.findViewById(R.id.subgrupo)).getText().toString();
                             //password por ahora no utilizamos
@@ -97,7 +94,6 @@ public class LoginActivity extends DefaultActivity {
 
             return rootView;
         }
-
     }
 
     public void completeLoginTask(SoapObject result) {
@@ -106,11 +102,9 @@ public class LoginActivity extends DefaultActivity {
         if(idSubgrupo == -1){
             showDialogError("Nombre de subgrupo incorrecto", "Error login");
         } else {
-
             ((JuegoColaborativo) getApplication()).setSubgrupo(new Subgrupo(idSubgrupo));
 
             this.hideProgressDialog();
-
             this.showProgressDialog("Obteniendo el punto a visitar");
 
             WSTask puntoInicialTask = new WSTask();
@@ -122,7 +116,6 @@ public class LoginActivity extends DefaultActivity {
     }
 
     public void completePuntoInicial(SoapObject result) {
-
         int idxPoiSubgrupo = 0;
         int idxPoiSiguiente = 1;
         double latitud = Double.parseDouble(((SoapObject) result.getProperty(idxPoiSubgrupo)).getProperty("coordenadaY").toString());

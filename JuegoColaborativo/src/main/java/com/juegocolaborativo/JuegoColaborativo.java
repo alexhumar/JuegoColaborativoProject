@@ -373,21 +373,19 @@ public class JuegoColaborativo extends Application {
             if (result.getPropertyCount() > this.getSubgrupo().getCantidadRespuestas()){
                 HashMap<Integer, Respuesta> respuestas = this.getSubgrupo().getRespuestas();
                 for (int i = 0; i < result.getPropertyCount(); i++) {
-                        int idSubgrupoConsultado = Integer.parseInt(((SoapObject) result.getProperty(i)).getProperty("idSubgrupoConsultado").toString());
-                        int acuerdoPropuesta = Integer.parseInt(((SoapObject) result.getProperty(i)).getProperty("acuerdoPropuesta").toString());
-                        String justificacion = ((SoapObject) result.getProperty(i)).getProperty("justificacion").toString();
+                    int idSubgrupoConsultado = Integer.parseInt(((SoapObject) result.getProperty(i)).getProperty("idSubgrupoConsultado").toString());
+                    int acuerdoPropuesta = Integer.parseInt(((SoapObject) result.getProperty(i)).getProperty("acuerdoPropuesta").toString());
+                    String justificacion = ((SoapObject) result.getProperty(i)).getProperty("justificacion").toString();
 
-                        //busco en la lista de respuestas de la pieza actual del subgrupo y guardo la respuesta
-                        respuestas.get(idSubgrupoConsultado).setCumple(acuerdoPropuesta);
-                        respuestas.get(idSubgrupoConsultado).setJustificacion(justificacion);
+                    //busco en la lista de respuestas de la pieza actual del subgrupo y guardo la respuesta
+                    respuestas.get(idSubgrupoConsultado).setCumple(acuerdoPropuesta);
+                    respuestas.get(idSubgrupoConsultado).setJustificacion(justificacion);
 
-                        this.getSubgrupo().setCantidadRespuestas(this.getSubgrupo().getCantidadRespuestas() + 1);
+                    this.getSubgrupo().setCantidadRespuestas(this.getSubgrupo().getCantidadRespuestas() + 1);
                     }
 
                     getCurrentActivity().getResultadosAdapter().notifyDataSetChanged();
-
                 }
-
         } catch (Exception e){
             Log.e("ERROR", e.getMessage());
         }

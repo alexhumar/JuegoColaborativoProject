@@ -74,41 +74,38 @@ public class ResponderActivity extends DefaultActivity {
 
             final View buttonEnviar = rootView.findViewById(R.id.button_responder);
             buttonEnviar.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                            if(((TextView) rootView.findViewById(R.id.justificacion)).getText().toString().trim().length() == 0){
-                                Toast toast = Toast.makeText(rootView.getContext(), "Por favor, ingrese la justificación de su respuesta", Toast.LENGTH_SHORT);
-                                toast.show();
-                            } else {
-                                JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
-                                ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaConsulta);
+                        if(((TextView) rootView.findViewById(R.id.justificacion)).getText().toString().trim().length() == 0){
+                            Toast toast = Toast.makeText(rootView.getContext(), "Por favor, ingrese la justificación de su respuesta", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
+                            ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaConsulta);
 
-                                ((ResponderActivity) getActivity()).showProgressDialog("Enviando respuesta");
+                            ((ResponderActivity) getActivity()).showProgressDialog("Enviando respuesta");
 
-                                int idConsulta = app.getSubgrupo().getConsultaActual().getId();
-                                int acuerdo = respuesta.isChecked() ? 1 : 0;
-                                String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
+                            int idConsulta = app.getSubgrupo().getConsultaActual().getId();
+                            int acuerdo = respuesta.isChecked() ? 1 : 0;
+                            String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
 
-                                app.getSubgrupo().getConsultaActual().setRespondida(1);
+                            app.getSubgrupo().getConsultaActual().setRespondida(1);
 
-                                WSTask guardarRespuestaTask = new WSTask();
-                                guardarRespuestaTask.setReferer(getActivity());
-                                guardarRespuestaTask.setMethodName(SoapManager.METHOD_GUARDAR_RESPUESTA);
-                                guardarRespuestaTask.addStringParameter("idConsulta", Integer.toString(idConsulta));
-                                guardarRespuestaTask.addStringParameter("idSubgrupoConsultado", Integer.toString(app.getSubgrupo().getConsultaActual().getId()));
-                                guardarRespuestaTask.addStringParameter("acuerdo", Integer.toString(acuerdo));
-                                guardarRespuestaTask.addStringParameter("justificacion", justificacion);
-                                guardarRespuestaTask.executeTask("completeGuardarRespuesta", "errorGuardarRespuesta");
+                            WSTask guardarRespuestaTask = new WSTask();
+                            guardarRespuestaTask.setReferer(getActivity());
+                            guardarRespuestaTask.setMethodName(SoapManager.METHOD_GUARDAR_RESPUESTA);
+                            guardarRespuestaTask.addStringParameter("idConsulta", Integer.toString(idConsulta));
+                            guardarRespuestaTask.addStringParameter("idSubgrupoConsultado", Integer.toString(app.getSubgrupo().getConsultaActual().getId()));
+                            guardarRespuestaTask.addStringParameter("acuerdo", Integer.toString(acuerdo));
+                            guardarRespuestaTask.addStringParameter("justificacion", justificacion);
+                            guardarRespuestaTask.executeTask("completeGuardarRespuesta", "errorGuardarRespuesta");
 
-                                getActivity().finish();
-                            }
-
+                            getActivity().finish();
                         }
                     }
-
-
+                }
             );
 
             return rootView;

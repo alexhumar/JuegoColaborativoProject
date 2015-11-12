@@ -6,17 +6,13 @@ import android.util.Log;
 import com.juegocolaborativo.soap.SoapManager;
 
 import org.ksoap2.SoapEnvelope;
-import org.ksoap2.SoapFault;
+import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.transport.HttpTransportSE;
-import org.apache.http.NameValuePair;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.lang.Object;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class WSTask extends AsyncTask<Void, Void, SoapObject> {
@@ -32,7 +28,6 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
         this.setParameters(new ArrayList<PropertyInfo>());
     }
 
-    //private ArrayList<NameValuePair> parameters = null;
     private ArrayList<PropertyInfo> parameters = null;
 
     public Object getReferer() {
@@ -59,17 +54,9 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
         this.errorCallback = errorCallback;
     }
 
-    /*public ArrayList<NameValuePair> getParameters() {
-        return parameters;
-    }*/
-
     public ArrayList<PropertyInfo> getParameters() {
         return parameters;
     }
-
-    /*public void setParameters(ArrayList<NameValuePair> parameters) {
-        this.parameters = parameters;
-    }*/
 
     public void setParameters(ArrayList<PropertyInfo> parameters) {
         this.parameters = parameters;
@@ -96,11 +83,7 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
     }
 
     public void addStringParameter(String name, Object value) {
-        this.addParameter(name, value, /*PropertyInfo.STRING_CLASS*/PropertyInfo.OBJECT_CLASS);
-    }
-
-    public void addIntegerParameter(String name, Object value) {
-        this.addParameter(name, value, PropertyInfo.INTEGER_CLASS);
+        this.addParameter(name, value, PropertyInfo.STRING_CLASS);
     }
 
     protected SoapObject doInBackground(Void... params) {
@@ -112,12 +95,8 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
             SoapObject request = new SoapObject(soapManager.getNamespace(), this.getMethodName());
 
             // Paso parametros al WS
-            /*for(NameValuePair parameter : this.getParameters()) {
-                request.addProperty(parameter.getName(), parameter.getValue());
-            }*/
             for(PropertyInfo parameter : this.getParameters()) {
                 request.addProperty(parameter);
-                //request.addProperty(parameter.getName(), parameter.getValue());
             }
 
             // Modelo el Envelope (envoltura)
@@ -159,7 +138,6 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
             }
         } catch (Exception e) {
             Log.e("ERROR", "Error en invocación de método de callback: "+ this.getMethod() + " - ERROR: " + e.getStackTrace());
-            //AndroidLogger.logger.error("Error en invocación de método de callback: "+ this.getMethod());
         }
     }
 
