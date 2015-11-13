@@ -92,9 +92,8 @@
         android:id="@+id/button_enviar"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_marginRight="40dp"
-        android:layout_alignTop="@+id/button_consultar"
-        android:layout_toLeftOf="@+id/button_consultar" />
+        android:layout_below="@+id/justificacion"
+        android:layout_alignParentLeft="true" />
 
     <Button
         android:layout_width="250dp"
@@ -103,8 +102,10 @@
         android:id="@+id/button_consultar"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_below="@+id/justificacion"
-        android:layout_toLeftOf="@+id/respuestaDecision" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/respuestaDecision"
+        android:layout_alignLeft="@+id/button_respuestas"
+        android:layout_alignTop="@+id/button_enviar" />
 
     <Button
         android:layout_width="250dp"
@@ -113,8 +114,10 @@
         android:id="@+id/button_respuestas"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_below="@+id/justificacion"
-        android:layout_toLeftOf="@+id/respuestaDecision" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/button_enviar"
+        android:layout_toRightOf="@+id/pieza" />
 
 
 </RelativeLayout>

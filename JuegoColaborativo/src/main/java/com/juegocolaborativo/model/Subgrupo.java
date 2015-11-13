@@ -17,9 +17,10 @@ public class Subgrupo {
 	private Posta posta;
 	private Consulta consultaActual;
 
-	public static final int ESTADO_INICIAL = 1;
-	public static final int ESTADO_JUGANDO = 2;
-	public static final int ESTADO_FINAL = 3;
+	public static final int ESTADO_CREADO = 1;
+	public static final int ESTADO_INICIAL = 2;
+	public static final int ESTADO_JUGANDO = 3;
+	public static final int ESTADO_FINAL = 4;
 		
 	public Subgrupo(int id) {
 		super();

@@ -232,6 +232,7 @@ public class MapActivity extends DefaultActivity implements
 
             Subgrupo subgrupo = ((JuegoColaborativo) getApplication()).getSubgrupo();
 
+            //La primera vez que pasa por aca la pieza aun no se ha seteado
             if(subgrupo.getPosta().getPiezaARecolectar() == null || !subgrupo.getPosta().getPiezaARecolectar().isVisitada()){
                 // Mostramos el punto correspondiente a la posta del subgrupo
                 Poi poiSubgrupo = subgrupo.getPosta().getPoi();
@@ -241,14 +242,20 @@ public class MapActivity extends DefaultActivity implements
                         .title("Poi Subgrupo")
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.start_flag)));
             } else {
-                // Mostramos el punto al que debe dirigirse luego de reponder su Pieza
-                this.showDialogError("Has respondido la consigna! Ahora ve al punto siguiente!", "JuegoColaborativo");
                 Poi poiSiguiente = subgrupo.getPosta().getSiguientePosta().getPoi();
-                addProximityAlert(poiSiguiente, PROX_ALERT_POI_SIGUIENTE, 0);
-                this.getGoogleMap().addMarker(new MarkerOptions()
-                        .position(new LatLng(poiSiguiente.getCoordenadas().getLatitud(), poiSiguiente.getCoordenadas().getLongitud()))
-                        .title("Poi Siguiente")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.end_flag)));
+                if(poiSiguiente.getCoordenadas().getLatitud() == -1) {
+                    // No hay posta siguiente, termina el juego.
+                    ((JuegoColaborativo) getApplication()).enviarFinJuego(true);
+                }else{
+                    // Mostramos el punto al que debe dirigirse luego de reponder su Pieza
+                    this.showDialogError("Has respondido la consigna! Ahora ve al punto siguiente!", "JuegoColaborativo");
+                    addProximityAlert(poiSiguiente, PROX_ALERT_POI_SIGUIENTE, 0);
+                    this.getGoogleMap().addMarker(new MarkerOptions()
+                            .position(new LatLng(poiSiguiente.getCoordenadas().getLatitud(), poiSiguiente.getCoordenadas().getLongitud()))
+                            .title("Poi Siguiente")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.end_flag)));
+                }
+
             }
         }
     }

@@ -154,11 +154,13 @@ public class JuegoColaborativo extends Application {
      */
     public void esperarEstadoSubgrupos(){
         String idEstado = Integer.toString(this.getSubgrupo().getEstado());
+        String idSubgrupo = Integer.toString(this.getSubgrupo().getId());
 
         WSTask esperarEstadoTask = new WSTask();
         esperarEstadoTask.setReferer(this);
         esperarEstadoTask.setMethodName(SoapManager.METHOD_ESPERAR_ESTADO_SUBGRUPOS);
         esperarEstadoTask.addStringParameter("idEstado", idEstado);
+        esperarEstadoTask.addStringParameter("idSubgrupo", idSubgrupo);
         esperarEstadoTask.executeTask("completeEsperarEstadoSubgrupos", "errorEsperarEstadoSubgrupos");
     }
 
@@ -240,10 +242,19 @@ public class JuegoColaborativo extends Application {
         this.getCurrentActivity().startActivity(new Intent(this, PiezaActivity.class));
     }
 
-    public void enviarFinJuego(){
-        //detengo el proximity alert del poi final y limpio el mapa (borro marker poi final)
-        this.getCurrentActivity().removerPuntoFinal();
-        this.getCurrentActivity().showDialogError("Has llegado a la Posta siguiente! Ahora espera los resultados!", "JuegoColaborativo");
+    public void enviarFinJuego(Boolean... terminarJuego){
+        //Como java no soporta parametros opcionales, recibo parametros variables y verifico si fue enviado y si es true.
+        boolean terminar = (terminarJuego.length > 0 && terminarJuego[0]);
+
+        if(terminar){
+            this.getCurrentActivity().showDialogError("Juego terminado! Ahora espera los resultados!", "JuegoColaborativo");
+        }else{
+            //detengo el proximity alert del poi final y limpio el mapa (borro marker poi final)
+
+            this.getCurrentActivity().removerPuntoFinal();
+            this.getCurrentActivity().showDialogError("Has llegado a la Posta siguiente! Ahora espera los resultados!", "JuegoColaborativo");
+        }
+
 
         //aviso que ya terminé de jugar
         getSubgrupo().setEstado(getSubgrupo().ESTADO_FINAL);

@@ -72,8 +72,7 @@
         android:id="@+id/tituloRespuesta"
         android:layout_alignTop="@+id/respuestaDecision"
         android:layout_toLeftOf="@+id/respuestaDecision"
-        style="@style/tituloRespuesta"
-        android:layout_above="@+id/tituloRespuesta" />
+        style="@style/tituloRespuesta" />
 
     <EditText
         android:id="@+id/justificacion"
