@@ -158,9 +158,15 @@ public class JuegoColaborativo extends Application {
 
         WSTask esperarEstadoTask = new WSTask();
         esperarEstadoTask.setReferer(this);
-        esperarEstadoTask.setMethodName(SoapManager.METHOD_ESPERAR_ESTADO_SUBGRUPOS);
-        esperarEstadoTask.addStringParameter("idEstado", idEstado);
-        esperarEstadoTask.addStringParameter("idSubgrupo", idSubgrupo);
+
+        if (getSubgrupo().getEstado() == getSubgrupo().ESTADO_FINAL){
+            esperarEstadoTask.setMethodName(SoapManager.METHOD_ESPERAR_ESTADO_FINAL);
+        }else{
+            esperarEstadoTask.setMethodName(SoapManager.METHOD_ESPERAR_ESTADO_SUBGRUPOS);
+            esperarEstadoTask.addStringParameter("idEstado", idEstado);
+            esperarEstadoTask.addStringParameter("idSubgrupo", idSubgrupo);
+        }
+
         esperarEstadoTask.executeTask("completeEsperarEstadoSubgrupos", "errorEsperarEstadoSubgrupos");
     }
 
