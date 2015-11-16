@@ -28,15 +28,22 @@ public class DefaultActivity extends Activity {
         this.progressDialog = progressDialog;
     }
 
-    public void showProgressDialog(String msg){
-        if (!(this.getProgressDialog() != null && this.getProgressDialog().isShowing())){
+    public void showProgressDialog(String msg, boolean... mostrarUnicoParam){
+        //Como java no soporta parametros opcionales, recibo parametros variables y verifico si fue enviado y si es true.
+        boolean mostrarUnico = (mostrarUnicoParam.length > 0 && mostrarUnicoParam[0]);
+        boolean mostrandoCartel = (this.getProgressDialog() != null && this.getProgressDialog().isShowing());
+
+        if (!mostrandoCartel){
             ProgressDialog pd = new ProgressDialog(this);
             pd.setCancelable(false);
             this.setProgressDialog(pd);
         }
 
-        this.getProgressDialog().setMessage(msg);
-        this.getProgressDialog().show();
+        if((!mostrandoCartel && mostrarUnico ) || !mostrarUnico){
+            this.getProgressDialog().setMessage(msg);
+            this.getProgressDialog().show();
+        }
+
     }
 
     public void hideProgressDialog(){

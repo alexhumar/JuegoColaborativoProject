@@ -177,13 +177,21 @@ public class JuegoColaborativo extends Application {
         int llegaronSubgrupos = Integer.parseInt(res.toString());
 
         if (llegaronSubgrupos == 1){
+            this.getCurrentActivity().hideProgressDialog();
             //ahora dependendiendo del estado esperado, es el metodo que debo llamar despues de ejecutar la tarea
-            if (getSubgrupo().getEstado() == getSubgrupo().ESTADO_INICIAL){
+            if (getSubgrupo().getEstado() == Subgrupo.ESTADO_INICIAL){
                 this.enviarJugando();
             }
-            else if (getSubgrupo().getEstado() == getSubgrupo().ESTADO_FINAL){
+            else if (getSubgrupo().getEstado() == Subgrupo.ESTADO_FINAL){
                 this.finJuego();
             }
+        }else{
+            if(getSubgrupo().getEstado() == Subgrupo.ESTADO_INICIAL){
+                this.getCurrentActivity().showProgressDialog("Esperando a los demas subgrupos...", true);
+            }else if (getSubgrupo().getEstado() == Subgrupo.ESTADO_FINAL){
+                this.getCurrentActivity().showDialogError("Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos", "Juego coblaborativo");
+            }
+
         }
     }
 
@@ -258,7 +266,7 @@ public class JuegoColaborativo extends Application {
             //detengo el proximity alert del poi final y limpio el mapa (borro marker poi final)
 
             this.getCurrentActivity().removerPuntoFinal();
-            this.getCurrentActivity().showDialogError("Has llegado a la Posta siguiente! Ahora espera los resultados!", "JuegoColaborativo");
+            //this.getCurrentActivity().showDialogError("Has llegado a la Posta siguiente! Ahora espera los resultados!", "JuegoColaborativo");
         }
 
 
