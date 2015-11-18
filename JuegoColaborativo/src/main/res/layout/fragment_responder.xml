@@ -12,9 +12,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/titulo_activity_responder"
         android:id="@+id/titulo"
-        android:layout_below="@+id/linearLayout"
-        android:layout_marginTop="10dp"
-        style="@style/tituloActivity"/>
+        style="@style/tituloActivity"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -41,9 +41,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/pieza"
         android:id="@+id/pieza"
+        style="@style/tituloPieza"
         android:layout_below="@+id/descripcionConsigna"
-        android:layout_marginTop="20dp"
-        style="@style/tituloPieza"/>
+        android:layout_alignParentLeft="true" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -81,29 +81,27 @@
 
     <ToggleButton
         android:id="@+id/respuestaConsulta"
-        android:layout_below="@+id/descripcionConsulta"
         android:textOn="SI"
         android:textOff="NO"
         android:checked="false"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
         style="@style/buttonDecision"
-        android:layout_toRightOf="@+id/button_responder" />
+        android:layout_below="@+id/descripcionConsulta"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/respuesta_consulta"
         android:id="@+id/tituloRespuesta"
         android:layout_alignTop="@+id/respuestaConsulta"
-        android:layout_toLeftOf="@+id/respuestaConsulta"
         style="@style/tituloRespuesta"
-        android:layout_above="@+id/tituloRespuesta" />
+        android:layout_above="@+id/tituloRespuesta"
+        android:layout_toLeftOf="@+id/respuestaConsulta" />
 
     <EditText
         android:id="@+id/justificacion"
-        android:layout_below="@+id/tituloRespuesta"
         style="@style/editText"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/respuestaConsulta"
+        android:layout_alignParentLeft="true" />
 
     <Button
         android:layout_width="150dp"
@@ -113,7 +111,7 @@
         android:background="@drawable/rustic_button"
         style="@style/button"
         android:layout_below="@+id/justificacion"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/consigna" />
 
 </RelativeLayout>

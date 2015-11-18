@@ -116,11 +116,6 @@ public class JuegoColaborativo extends Application {
 
     public void completeEnviarJugando(SoapObject result) {
         try{
-            //el resultado trae el nombre y la consigna del grupo al cual pertenece el subgrupo
-            Consigna consigna = new Consigna(((SoapPrimitive) result.getProperty("nombre")).toString(),((SoapPrimitive) result.getProperty("descripcion")).toString());
-            this.getSubgrupo().getGrupo().setNombre(((SoapPrimitive) result.getProperty("nombreGrupo")).toString());
-            this.getSubgrupo().getGrupo().setConsigna(consigna);
-
             this.comienzoJuego();
         }catch (Exception e){
             Log.e("ERROR", e.getMessage());
@@ -189,7 +184,7 @@ public class JuegoColaborativo extends Application {
             if(getSubgrupo().getEstado() == Subgrupo.ESTADO_INICIAL){
                 this.getCurrentActivity().showProgressDialog("Esperando a los demas subgrupos...", true);
             }else if (getSubgrupo().getEstado() == Subgrupo.ESTADO_FINAL){
-                this.getCurrentActivity().showDialogError("Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos", "Juego coblaborativo");
+                this.getCurrentActivity().showProgressDialog("Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos", true);
             }
 
         }
@@ -347,14 +342,14 @@ public class JuegoColaborativo extends Application {
     public void completeEsperarPreguntasSubgrupos(SoapObject result) {
         try{
             //chequeo si el valor del resultado es positivo para levantar la pregunta y poder responderla
-            SoapPrimitive res = (SoapPrimitive) result.getProperty("idSubgrupoConsultado");
-            int id = Integer.parseInt(res.toString());
+            SoapPrimitive res = (SoapPrimitive) result.getProperty("id");
+            int idConsulta = Integer.parseInt(res.toString());
 
-            if (id != -1){
+            if (idConsulta != -1){
                 //chequeo si ya respondí esa consulta
-                if ((this.getSubgrupo().getIdsConsultasQueMeHicieron().isEmpty()) || (!(this.getSubgrupo().getIdsConsultasQueMeHicieron()).contains(id))){
+                if ((this.getSubgrupo().getIdsConsultasQueMeHicieron().isEmpty()) || (!(this.getSubgrupo().getIdsConsultasQueMeHicieron()).contains(idConsulta))){
                     //agrego el id a las consultas que me hicieron
-                    this.getSubgrupo().getIdsConsultasQueMeHicieron().add(id);
+                    this.getSubgrupo().getIdsConsultasQueMeHicieron().add(idConsulta);
                     //creo el objeto Consulta y lo seteo a la consultaActual
                     SoapPrimitive res2 = (SoapPrimitive) result.getProperty("nombrePieza");
                     String nombrePieza = res2.toString();
@@ -365,7 +360,7 @@ public class JuegoColaborativo extends Application {
                     SoapPrimitive res5 = (SoapPrimitive) result.getProperty("justificacion");
                     String justificacion = res5.toString();
 
-                    this.getSubgrupo().setConsultaActual(new Consulta(id,nombrePieza,descripcionPieza,cumple,justificacion));
+                    this.getSubgrupo().setConsultaActual(new Consulta(idConsulta,nombrePieza,descripcionPieza,cumple,justificacion));
                     // Inicio la activity para responder la consulta
                     this.getCurrentActivity().startActivity(new Intent(this, ResponderActivity.class));
                 }

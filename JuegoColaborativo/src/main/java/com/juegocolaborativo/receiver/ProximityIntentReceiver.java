@@ -8,12 +8,14 @@ import android.util.Log;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.activity.MapActivity;
+import com.juegocolaborativo.model.Consigna;
 import com.juegocolaborativo.model.Subgrupo;
 import com.juegocolaborativo.service.PoolServiceEstados;
 import com.juegocolaborativo.soap.SoapManager;
 import com.juegocolaborativo.task.WSTask;
 
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 
 public class ProximityIntentReceiver extends BroadcastReceiver {
 
@@ -57,6 +59,24 @@ public class ProximityIntentReceiver extends BroadcastReceiver {
 
     public void completeCambiarEstadoSubgrupo(SoapObject result) {
         try{
+            String idSubgrupo = Integer.toString(this.getApplication().getSubgrupo().getId());
+            //Ejecuto la tarea que obtiene la consulta del subgrupo.
+            WSTask getConsignaTask = new WSTask();
+            getConsignaTask.setReferer(this);
+            getConsignaTask.setMethodName(SoapManager.METHOD_GET_CONSIGNA);
+            getConsignaTask.addStringParameter("idSubgrupo", idSubgrupo);
+            getConsignaTask.executeTask("completeGetConsigna", "errorCambiarEstadoSubgrupo");
+        }catch (Exception e){
+            Log.e("ERROR", e.getMessage());
+        }
+    }
+
+    public void completeGetConsigna(SoapObject result) {
+        try{
+            //el resultado trae el nombre y la consigna del grupo al cual pertenece el subgrupo
+            Consigna consigna = new Consigna(result.getProperty("nombre").toString(),result.getProperty("descripcion").toString());
+            this.getApplication().getSubgrupo().getGrupo().setNombre(result.getProperty("nombreGrupo").toString());
+            this.getApplication().getSubgrupo().getGrupo().setConsigna(consigna);
             //Genera la barrera para esperar a que todos los demas subgrupos lleguen a sus respectivas postas.
             this.getApplication().getCurrentActivity().startService(new Intent(this.getApplication().getCurrentActivity(), PoolServiceEstados.class));
         }catch (Exception e){

@@ -104,8 +104,8 @@
         style="@style/button"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/respuestaDecision"
-        android:layout_alignLeft="@+id/button_respuestas"
-        android:layout_alignTop="@+id/button_enviar" />
+        android:layout_alignTop="@+id/button_enviar"
+        android:layout_alignLeft="@+id/tituloPieza" />
 
     <Button
         android:layout_width="250dp"
@@ -114,10 +114,8 @@
         android:id="@+id/button_respuestas"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/button_enviar"
-        android:layout_toRightOf="@+id/pieza" />
+        android:layout_below="@+id/justificacion"
+        android:layout_alignLeft="@+id/button_consultar" />
 
 
 </RelativeLayout>

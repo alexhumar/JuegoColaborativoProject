@@ -97,12 +97,12 @@ public class ResponderActivity extends DefaultActivity {
                             guardarRespuestaTask.setReferer(getActivity());
                             guardarRespuestaTask.setMethodName(SoapManager.METHOD_GUARDAR_RESPUESTA);
                             guardarRespuestaTask.addStringParameter("idConsulta", Integer.toString(idConsulta));
-                            guardarRespuestaTask.addStringParameter("idSubgrupoConsultado", Integer.toString(app.getSubgrupo().getConsultaActual().getId()));
+                            guardarRespuestaTask.addStringParameter("idSubgrupoConsultado", Integer.toString(app.getSubgrupo().getId()));
                             guardarRespuestaTask.addStringParameter("acuerdo", Integer.toString(acuerdo));
                             guardarRespuestaTask.addStringParameter("justificacion", justificacion);
                             guardarRespuestaTask.executeTask("completeGuardarRespuesta", "errorGuardarRespuesta");
 
-                            getActivity().finish();
+                            //getActivity().finish();
                         }
                     }
                 }
