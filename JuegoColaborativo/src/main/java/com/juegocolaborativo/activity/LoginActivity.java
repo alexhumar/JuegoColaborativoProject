@@ -69,11 +69,12 @@ public class LoginActivity extends DefaultActivity {
                     public void onClick(View v) {
 
                         if(((TextView) rootView.findViewById(R.id.subgrupo)).getText().toString().trim().length() == 0){
-                            Toast toast = Toast.makeText(rootView.getContext(), "Por favor, ingrese un subgrupo", Toast.LENGTH_SHORT);
+                            String mensaje = getActivity().getString(R.string.toast_ingresar_subgrupo);
+                            Toast toast = Toast.makeText(rootView.getContext(), mensaje, Toast.LENGTH_SHORT);
                             toast.show();
                         } else {
 
-                            ((LoginActivity) getActivity()).showProgressDialog("Verificando");
+                            ((LoginActivity) getActivity()).showProgressDialog(R.string.dialog_verificando);
 
                             //obtengo el subgrupo de la vista
                             String nombreSubgrupo = ((TextView) rootView.findViewById(R.id.subgrupo)).getText().toString();
@@ -100,12 +101,12 @@ public class LoginActivity extends DefaultActivity {
         SoapPrimitive res = (SoapPrimitive) result.getProperty("valorInteger");
         int idSubgrupo = Integer.parseInt(res.toString());
         if(idSubgrupo == -1){
-            showDialogError("Nombre de subgrupo incorrecto", "Error login");
+            this.showDialogInfo(R.string.dialog_subgrupo_incorrecto);
         } else {
             ((JuegoColaborativo) getApplication()).setSubgrupo(new Subgrupo(idSubgrupo));
 
-            this.hideProgressDialog();
-            this.showProgressDialog("Obteniendo el punto a visitar");
+            this.closeProgressDialog();
+            this.showProgressDialog(R.string.dialog_obteniendo_poi);
 
             WSTask puntoInicialTask = new WSTask();
             puntoInicialTask.setReferer(this);
@@ -138,7 +139,7 @@ public class LoginActivity extends DefaultActivity {
     }
 
     public void errorLoginTask(String failedMethod){
-        showDialogError("Error en la tarea:" + failedMethod, "Error");
+        showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     /*Alex - por lo que entendi, un subgrupo queda apuntando a un grupo que contiene a todos los demas subgrupos.
@@ -163,7 +164,7 @@ public class LoginActivity extends DefaultActivity {
     }
 
     public void errorGetSubgrupos(String failedMethod){
-        showDialogError("Error en la tarea:" + failedMethod, "Error");
+        showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
 }

@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
 import com.juegocolaborativo.adapter.ResultadosAdapter;
+import com.juegocolaborativo.messages.MessagesManager;
 import com.juegocolaborativo.model.PiezaARecolectar;
 
 /**
@@ -17,57 +19,43 @@ import com.juegocolaborativo.model.PiezaARecolectar;
  */
 public class DefaultActivity extends Activity {
 
-    private ProgressDialog progressDialog = null;
     private ResultadosAdapter resultadosAdapter;
+    private MessagesManager messagesManager;
 
-    public ProgressDialog getProgressDialog() {
-        return progressDialog;
+    public MessagesManager getMessagesManager() {
+        return messagesManager;
     }
 
-    public void setProgressDialog(ProgressDialog progressDialog) {
-        this.progressDialog = progressDialog;
+    public void setMessagesManager(MessagesManager messagesManager) {
+        this.messagesManager = messagesManager;
     }
 
-    public void showProgressDialog(String msg, boolean... mostrarUnicoParam){
-        //Como java no soporta parametros opcionales, recibo parametros variables y verifico si fue enviado y si es true.
-        boolean mostrarUnico = (mostrarUnicoParam.length > 0 && mostrarUnicoParam[0]);
-        boolean mostrandoCartel = (this.getProgressDialog() != null && this.getProgressDialog().isShowing());
-
-        if (!mostrandoCartel){
-            ProgressDialog pd = new ProgressDialog(this);
-            pd.setCancelable(false);
-            this.setProgressDialog(pd);
-        }
-
-        if((!mostrandoCartel && mostrarUnico ) || !mostrarUnico){
-            this.getProgressDialog().setMessage(msg);
-            this.getProgressDialog().show();
-        }
-
+    public void showProgressDialog(int idString){
+        this.getMessagesManager().showProgressDialog(idString);
     }
 
-    public void hideProgressDialog(){
-        if (this.getProgressDialog() != null && this.getProgressDialog().isShowing()){
-            this.getProgressDialog().cancel();
-        }
+    public void closeProgressDialog(){
+        this.getMessagesManager().closeProgressDialog();
     }
 
     /**
      * Muestra un error generico
      */
-    public void showDialogError(String mensaje, String title) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder
-                .setTitle(title)
-                .setMessage(mensaje)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-        this.hideProgressDialog();
+    public void showDialogError(int idString, String param) {
+        this.getMessagesManager().showDialogError(idString, param);
+    }
+
+    /**
+     * Muestra un dialogo de informacion
+     */
+    public void showDialogInfo(int idString) {
+        this.getMessagesManager().showDialogInfo(idString);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        this.messagesManager = new MessagesManager(this);
     }
 
     @Override
@@ -97,7 +85,7 @@ public class DefaultActivity extends Activity {
         if ((((JuegoColaborativo) getApplication()).getSubgrupo().getConsultaActual() != null) && (((JuegoColaborativo) getApplication()).getSubgrupo().getConsultaActual().getRespondida() == 1)){
             //borro la consulta actual porque ya fue respondida
             ((JuegoColaborativo) getApplication()).getSubgrupo().setConsultaActual(null);
-            showDialogError("Se envió la respuesta al subgrupo, gracias!", "Respuesta");
+            showDialogInfo(R.string.dialog_respuesta_enviada);
         }
     }
 

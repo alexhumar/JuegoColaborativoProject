@@ -248,7 +248,7 @@ public class MapActivity extends DefaultActivity implements
                     ((JuegoColaborativo) getApplication()).enviarFinJuego(true);
                 }else{
                     // Mostramos el punto al que debe dirigirse luego de reponder su Pieza
-                    this.showDialogError("Has respondido la consigna! Ahora ve al punto siguiente!", "JuegoColaborativo");
+                    this.showDialogInfo(R.string.dialog_consigna_respondida);
                     addProximityAlert(poiSiguiente, PROX_ALERT_POI_SIGUIENTE, 0);
                     this.getGoogleMap().addMarker(new MarkerOptions()
                             .position(new LatLng(poiSiguiente.getCoordenadas().getLatitud(), poiSiguiente.getCoordenadas().getLongitud()))
@@ -288,6 +288,14 @@ public class MapActivity extends DefaultActivity implements
         enviarMsjConsultaRespondida();
         super.onResume();
         this.initializeMap();//Cuando estas jugando y tenes que responder una pregunta, la activity se detiene. Luego de responder, reanuda.
+
+        Subgrupo subgrupo = ((JuegoColaborativo) getApplication()).getSubgrupo();
+
+        if(subgrupo.getEstado() == Subgrupo.ESTADO_INICIAL){
+            this.showProgressDialog(R.string.dialog_consulta_respondida_incial);
+        }else if(subgrupo.getEstado() == Subgrupo.ESTADO_FINAL){
+            this.showProgressDialog(R.string.dialog_consulta_respondida_final);
+        }
     }
 
     public void onLocationChanged(Location location) {

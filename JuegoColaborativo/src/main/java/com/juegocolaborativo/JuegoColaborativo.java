@@ -97,7 +97,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorEsSubgrupoActual(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void jugar() {
@@ -123,14 +123,14 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorEnviarJugando(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void enviarJugando(){
         //detengo el proximity alert del poi subgrupo y limpio el mapa (borro marker poi inicial)
         //Quizas convendria chequear si ya esta jugando (por si le llega una consulta mientras esta en su poi. Ver OnResume de MapActivity)
         this.getCurrentActivity().removerPuntoInicial();
-        this.getCurrentActivity().showDialogError("Felicitaciones, has llegado al poi asignado! Hora de jugar!", "JuegoColaborativo");
+        this.getCurrentActivity().showProgressDialog(R.string.dialog_llegada_posta_asignada);
 
         //creo la lista de consultas vacias del subgrupo
         this.getSubgrupo().setIdsConsultasQueMeHicieron(new ArrayList<Integer>());
@@ -172,7 +172,7 @@ public class JuegoColaborativo extends Application {
         int llegaronSubgrupos = Integer.parseInt(res.toString());
 
         if (llegaronSubgrupos == 1){
-            this.getCurrentActivity().hideProgressDialog();
+            this.getCurrentActivity().closeProgressDialog();
             //ahora dependendiendo del estado esperado, es el metodo que debo llamar despues de ejecutar la tarea
             if (getSubgrupo().getEstado() == Subgrupo.ESTADO_INICIAL){
                 this.enviarJugando();
@@ -182,21 +182,22 @@ public class JuegoColaborativo extends Application {
             }
         }else{
             if(getSubgrupo().getEstado() == Subgrupo.ESTADO_INICIAL){
-                this.getCurrentActivity().showProgressDialog("Esperando a los demas subgrupos...", true);
-            }else if (getSubgrupo().getEstado() == Subgrupo.ESTADO_FINAL){
-                this.getCurrentActivity().showProgressDialog("Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos", true);
+                this.getCurrentActivity().showProgressDialog(R.string.dialog_esperando_subgrupos);
+            }else if (((getSubgrupo().getEstado() == Subgrupo.ESTADO_FINAL)) && (this.getCurrentActivity().getClass() != ResponderActivity.class)){
+                //Si estoy respondiendo una consulta, no mostrar el cartel.
+                this.getCurrentActivity().showProgressDialog(R.string.dialog_llegada_posta_siguiente);
             }
 
         }
     }
 
     public void errorEsperarEstadoSubgrupos(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void comienzoJuego() {
         try{
-            this.getCurrentActivity().showDialogError("Es tu turno! Comienza el juego!", "JuegoColaborativo");
+            this.getCurrentActivity().showDialogInfo(R.string.dialog_notificacion_turno);
 
             String idSubgrupo = Integer.toString(this.getSubgrupo().getId());
 
@@ -239,7 +240,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorGetPiezaARecolectar(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea :" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea , failedMethod);
     }
 
     public void mostrarInfoPieza(){
@@ -256,7 +257,7 @@ public class JuegoColaborativo extends Application {
         boolean terminar = (terminarJuego.length > 0 && terminarJuego[0]);
 
         if(terminar){
-            this.getCurrentActivity().showDialogError("Juego terminado! Ahora espera los resultados!", "JuegoColaborativo");
+            this.getCurrentActivity().showDialogInfo(R.string.dialog_juego_terminado);
         }else{
             //detengo el proximity alert del poi final y limpio el mapa (borro marker poi final)
 
@@ -297,7 +298,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorEnviarFinJuego(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void completeSetPostaActual(SoapObject result){
@@ -305,7 +306,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorSetPostaActual(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void finJuego(){
@@ -336,7 +337,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorEsperarPreguntasSubgrupos(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void completeEsperarPreguntasSubgrupos(SoapObject result) {
@@ -385,7 +386,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorEsperarRespuestasSubgrupos(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void completeEsperarRespuestasSubgrupos(SoapObject result) {
@@ -412,7 +413,7 @@ public class JuegoColaborativo extends Application {
     }
 
     public void errorGetResultados(String failedMethod){
-        this.getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void completeGetResultados(SoapObject result) {

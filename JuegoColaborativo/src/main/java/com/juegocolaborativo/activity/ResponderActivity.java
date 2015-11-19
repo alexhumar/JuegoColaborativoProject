@@ -85,7 +85,7 @@ public class ResponderActivity extends DefaultActivity {
                             JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
                             ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaConsulta);
 
-                            ((ResponderActivity) getActivity()).showProgressDialog("Enviando respuesta");
+                            ((ResponderActivity) getActivity()).showProgressDialog(R.string.dialog_enviando_respuesta);
 
                             int idConsulta = app.getSubgrupo().getConsultaActual().getId();
                             int acuerdo = respuesta.isChecked() ? 1 : 0;
@@ -118,7 +118,7 @@ public class ResponderActivity extends DefaultActivity {
     }
 
     public void errorGuardarRespuesta(String failedMethod){
-        showDialogError("Error en la tarea:" + failedMethod, "Error");
+        showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
 }

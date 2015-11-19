@@ -109,7 +109,7 @@ public class PiezaActivity extends DefaultActivity {
                             //seteo el flag del subgrupo esperando rta para mostrar o no el boton
                             ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaDecision);
 
-                            ((PiezaActivity) getActivity()).showProgressDialog("Enviando respuesta");
+                            ((PiezaActivity) getActivity()).showProgressDialog(R.string.dialog_enviando_respuesta);
 
                             int idSubgrupo = app.getSubgrupo().getId();
                             int idPieza = app.getPiezaActual().getId();
@@ -146,7 +146,7 @@ public class PiezaActivity extends DefaultActivity {
 
                             ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaDecision);
 
-                            ((PiezaActivity) getActivity()).showProgressDialog("Enviando consulta");
+                            ((PiezaActivity) getActivity()).showProgressDialog(R.string.dialog_enviando_consulta);
 
                             int idSubgrupo = app.getSubgrupo().getId();
                             int idPieza = app.getPiezaActual().getId();
@@ -188,18 +188,18 @@ public class PiezaActivity extends DefaultActivity {
     }
 
     public void errorDecisionTomadaTask(String failedMethod){
-        showDialogError("Error en la tarea:" + failedMethod, "Error");
+        showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public void completeConsultaEnviada(SoapObject result) {
         //aca deberia crear un nuevo PoolService para esperar las respuestas
-        hideProgressDialog();
+        this.closeProgressDialog();
         this.startService(new Intent(this, PoolServiceRespuestas.class));
         this.startActivity(new Intent(this, RespuestasActivity.class));
     }
 
     public void errorConsultaEnviada(String failedMethod){
-        showDialogError("Error en la tarea:" + failedMethod, "Error");
+        showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     /* ANALYSIS: ESTO SE LLAMA PORQUE PUEDE CAER DE LA NADA UNA CONSULTA, SACARTE DE CONTEXTO,

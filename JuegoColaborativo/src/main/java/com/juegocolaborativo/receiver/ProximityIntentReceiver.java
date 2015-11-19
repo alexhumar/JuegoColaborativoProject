@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.util.Log;
 
 import com.juegocolaborativo.JuegoColaborativo;
+import com.juegocolaborativo.R;
 import com.juegocolaborativo.activity.MapActivity;
 import com.juegocolaborativo.model.Consigna;
 import com.juegocolaborativo.model.Subgrupo;
@@ -85,7 +86,7 @@ public class ProximityIntentReceiver extends BroadcastReceiver {
     }
 
     public void errorCambiarEstadoSubgrupo(String failedMethod){
-        this.getApplication().getCurrentActivity().showDialogError("Error en la tarea:" + failedMethod, "Error");
+        this.getApplication().getCurrentActivity().showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
     public JuegoColaborativo getApplication() {

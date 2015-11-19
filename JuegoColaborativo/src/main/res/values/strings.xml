@@ -35,4 +35,28 @@
     <string name="serverport">Puerto del servidor</string>
     <string name="menu_settings">Settings</string>
 
+    <!-- Internacionalizacion de dialogos -->
+
+    <string name="button_aceptar">Aceptar</string>
+    <string name="button_cerrar">Cerrar</string>
+
+    <string name="dialog_info">Informacion</string>
+    <string name="dialog_error">Error</string>
+    <string name="dialog_mensaje_error_tarea">Error en la tarea %1$s</string>
+    <string name="dialog_verificando">Verificando</string>
+    <string name="dialog_esperando_subgrupos">Esperando a los demas subgrupos...</string>
+    <string name="dialog_llegada_posta_asignada">Felicitaciones, has llegado al poi asignado! Espera tu turno!</string>
+    <string name="dialog_llegada_posta_siguiente">Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos</string>
+    <string name="dialog_consulta_respondida_incial">Has respondido la consulta! Sigue esperando tu turno.</string>
+    <string name="dialog_consulta_respondida_final">Has respondido la consulta! Espera el fin del juego.</string>
+    <string name="dialog_respuesta_enviada">Se envió la respuesta al subgrupo, gracias!</string>
+    <string name="dialog_notificacion_turno">Es tu turno! Comienza el juego!</string>
+    <string name="dialog_juego_terminado">Juego terminado! Ahora espera los resultados!</string>
+    <string name="dialog_subgrupo_incorrecto">Nombre de subgrupo incorrecto</string>
+    <string name="dialog_obteniendo_poi">Obteniendo el punto a visitar</string>
+    <string name="dialog_consigna_respondida">Has respondido la consigna! Ahora ve al punto siguiente!</string>
+    <string name="dialog_enviando_respuesta">Enviando respuesta</string>
+    <string name="dialog_enviando_consulta">Enviando consulta</string>
+
+    <string name="toast_ingresar_subgrupo">Por favor, ingrese un subgrupo</string>
 </resources>
