@@ -1,9 +1,5 @@
 package com.juegocolaborativo.service;
 
-/**
- * Created by Dario on 27/01/14.
- */
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
@@ -14,9 +10,6 @@ import com.juegocolaborativo.JuegoColaborativo;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by Matias on 15/02/14.
- */
 public class PoolServiceEstados extends Service{
 
     public static final long UPDATE_INTERVAL = 5000;
@@ -31,20 +24,16 @@ public class PoolServiceEstados extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
-
         _startService();
-
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         _shutdownService();
     }
 
     private void _startService() {
-
         TimerTask asynchronousTask;
         final Handler handler = new Handler();
         asynchronousTask = new TimerTask() {
@@ -61,7 +50,6 @@ public class PoolServiceEstados extends Service{
                 });
             }
         };
-
         timer.scheduleAtFixedRate(asynchronousTask, DELAY_INTERVAL, UPDATE_INTERVAL);
     }
 
@@ -71,7 +59,7 @@ public class PoolServiceEstados extends Service{
         }
     }
     private void doServiceWork() {
-        // Llamar al WS
+        /* Llama al WS. */
         ((JuegoColaborativo) getApplication()).esperarEstadoSubgrupos();
     }
 

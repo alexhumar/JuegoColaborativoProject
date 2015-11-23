@@ -32,8 +32,7 @@ public class LoginActivity extends DefaultActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //Comentario de prueba :: Chache
-        /*Alex - Le agrega al FrameLayout de activity_login.xml el fragment declarado en esta clase*/
+        /* Le agrega al FrameLayout de activity_login.xml el fragment declarado en esta clase. */
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -43,15 +42,11 @@ public class LoginActivity extends DefaultActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
+        /* Inflate the menu; this adds items to the action bar if it is present. */
         getMenuInflater().inflate(R.menu.login, menu);
         return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -73,22 +68,18 @@ public class LoginActivity extends DefaultActivity {
                             Toast toast = Toast.makeText(rootView.getContext(), mensaje, Toast.LENGTH_SHORT);
                             toast.show();
                         } else {
-
                             ((LoginActivity) getActivity()).showProgressDialog(R.string.dialog_verificando);
-
-                            //obtengo el subgrupo de la vista
+                            /* Obtengo el subgrupo de la vista. */
                             String nombreSubgrupo = ((TextView) rootView.findViewById(R.id.subgrupo)).getText().toString();
-                            //password por ahora no utilizamos
+                            /* Password por ahora no utilizamos. */
                             //String password = ((TextView) rootView.findViewById(R.id.password)).getText().toString();
-
-                            //instancio la clase que ejecuta el web service
+                            /* Instancio la clase que ejecuta el web service. */
                             WSTask loginTask = new WSTask();
                             loginTask.setReferer(getActivity());
                             loginTask.setMethodName(SoapManager.METHOD_LOGIN);
                             loginTask.addStringParameter("nombreSubgrupo", nombreSubgrupo);
                             loginTask.executeTask("completeLoginTask", "errorLoginTask");
                         }
-
                     }
                 }
             );
@@ -97,6 +88,7 @@ public class LoginActivity extends DefaultActivity {
         }
     }
 
+    @SuppressWarnings("unused")
     public void completeLoginTask(SoapObject result) {
         SoapPrimitive res = (SoapPrimitive) result.getProperty("valorInteger");
         int idSubgrupo = Integer.parseInt(res.toString());
@@ -104,18 +96,17 @@ public class LoginActivity extends DefaultActivity {
             this.showDialogInfo(R.string.dialog_subgrupo_incorrecto);
         } else {
             ((JuegoColaborativo) getApplication()).setSubgrupo(new Subgrupo(idSubgrupo));
-
             this.closeProgressDialog();
             this.showProgressDialog(R.string.dialog_obteniendo_poi);
-
             WSTask puntoInicialTask = new WSTask();
             puntoInicialTask.setReferer(this);
             puntoInicialTask.setMethodName(SoapManager.METHOD_PUNTO_INICIAL);
             puntoInicialTask.addStringParameter("idSubgrupo", res.toString());
-            puntoInicialTask.executeTask("completePuntoInicial", "errorLoginTask");
+            puntoInicialTask.executeTask("completePuntoInicial", "errorPuntoInicial");
         }
     }
 
+    @SuppressWarnings("unused")
     public void completePuntoInicial(SoapObject result) {
         int idxPoiSubgrupo = 0;
         int idxPoiSiguiente = 1;
@@ -128,9 +119,7 @@ public class LoginActivity extends DefaultActivity {
         Posta postaSiguiente = new Posta(null, poiSiguiente);
         Posta postaSubgrupo = new Posta(postaSiguiente,poiSubgrupo);
         ((JuegoColaborativo) getApplication()).getSubgrupo().setPosta(postaSubgrupo);
-
         String idSubgrupo = Integer.toString(((JuegoColaborativo) getApplication()).getSubgrupo().getId());
-
         WSTask subgruposTask = new WSTask();
         subgruposTask.setReferer(this);
         subgruposTask.setMethodName(SoapManager.METHOD_GET_SUBGRUPOS);
@@ -138,13 +127,19 @@ public class LoginActivity extends DefaultActivity {
         subgruposTask.executeTask("completeGetSubgrupos", "errorGetSubgrupos");
     }
 
+    @SuppressWarnings("unused")
     public void errorLoginTask(String failedMethod){
         showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
 
-    /*Alex - por lo que entendi, un subgrupo queda apuntando a un grupo que contiene a todos los demas subgrupos.
-    * Luego se lanza MapActivity. */
+    @SuppressWarnings("unused")
+    public void errorPuntoInicial(String failedMethod){
+        showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
+    }
+
+    @SuppressWarnings("unused")
     public void completeGetSubgrupos(SoapObject result) {
+        /* Se carga la coleccion de subgrupos excluyendo al subgrupo del dispositivo y se invoca a MapActivity */
         try{
             ((JuegoColaborativo) getApplication()).getSubgrupo().setGrupo(new Grupo());
             ((JuegoColaborativo) getApplication()).getSubgrupo().getGrupo().setSubgrupos(new ArrayList<Subgrupo>());
@@ -163,8 +158,8 @@ public class LoginActivity extends DefaultActivity {
         }
     }
 
+    @SuppressWarnings("unused")
     public void errorGetSubgrupos(String failedMethod){
         showDialogError(R.string.dialog_mensaje_error_tarea, failedMethod);
     }
-
 }

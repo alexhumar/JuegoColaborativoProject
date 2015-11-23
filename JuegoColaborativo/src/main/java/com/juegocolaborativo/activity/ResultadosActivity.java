@@ -24,7 +24,6 @@ public class ResultadosActivity extends DefaultActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
-
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -32,18 +31,13 @@ public class ResultadosActivity extends DefaultActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
+        /* Inflate the menu; this adds items to the action bar if it is present. */
         getMenuInflater().inflate(R.menu.resultados, menu);
         return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -53,20 +47,16 @@ public class ResultadosActivity extends DefaultActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_resultados, container, false);
-
             JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
-            List<ResultadoFinal> list = new ArrayList<ResultadoFinal> (app.getResultadoFinal());
-            List<Resultado> listSubgrupo = new ArrayList<Resultado>();
+            List<ResultadoFinal> list = new ArrayList<> (app.getResultadoFinal());
+            List<Resultado> listSubgrupo = new ArrayList<>();
             listSubgrupo.add(app.getSubgrupo().getResultado());
-
             ListView listaResultados = (ListView) rootView.findViewById(R.id.listView);
-            listaResultados.setAdapter(new ResultadoItemAdapter((ResultadosActivity) this.getActivity(), list));
-
+            listaResultados.setAdapter(new ResultadoItemAdapter(this.getActivity(), list));
             ListView listaResultadosSubgrupo = (ListView) rootView.findViewById(R.id.listViewSugbrupo);
-            listaResultadosSubgrupo.setAdapter(new ResultadoItemSubgrupoAdapter((ResultadosActivity) this.getActivity(), listSubgrupo));
+            listaResultadosSubgrupo.setAdapter(new ResultadoItemSubgrupoAdapter(this.getActivity(), listSubgrupo));
 
             return rootView;
         }
     }
-
 }

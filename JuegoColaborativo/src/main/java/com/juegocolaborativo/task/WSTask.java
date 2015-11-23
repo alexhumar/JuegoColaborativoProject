@@ -1,8 +1,10 @@
 package com.juegocolaborativo.task;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.juegocolaborativo.R;
 import com.juegocolaborativo.soap.SoapManager;
 
 import org.ksoap2.SoapEnvelope;
@@ -14,13 +16,13 @@ import org.ksoap2.transport.HttpTransportSE;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class WSTask extends AsyncTask<Void, Void, SoapObject> {
 
     private Object referer = null;
     private Method method = null;
     private String errorCallback = null;
-    private Boolean primitive = true;
     private String methodName = null;
 
     public WSTask() {
@@ -70,10 +72,6 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
         this.methodName = method_name;
     }
 
-    public Boolean getPrimitive() { return primitive; }
-
-    public void setPrimitive(Boolean primitive) { this.primitive = primitive; }
-
     private void addParameter(String name, Object value, Object type) {
         PropertyInfo pi = new PropertyInfo();
         pi.setName(name);
@@ -89,33 +87,26 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
     protected SoapObject doInBackground(Void... params) {
 
         try {
-
             SoapManager soapManager = new SoapManager();
-            // Modelo el request
+            /* Modelo el request. */
             SoapObject request = new SoapObject(soapManager.getNamespace(), this.getMethodName());
-
-            // Paso parametros al WS
+            /* Paso parametros al WS. */
             for(PropertyInfo parameter : this.getParameters()) {
                 request.addProperty(parameter);
             }
-
-            // Modelo el Envelope (envoltura)
+            /* Modelo el Envelope (envoltura). */
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
             envelope.setOutputSoapObject(request);
-
-            // Modelo el transporte
+            /* Modelo el transporte. */
             HttpTransportSE transporte = new HttpTransportSE(soapManager.getUrl());
-
-            // Llamada
-            String theCall = soapManager.getNamespace() + "#" + this.getMethodName(); //Alex - prueba
+            /* Llamada. */
+            String theCall = soapManager.getNamespace() + "#" + this.getMethodName();
             transporte.call(theCall, envelope);
-
-            // Resultado
+            /* Resultado. */
             SoapObject resultado;
             resultado = (SoapObject) envelope.getResponse();
 
             return resultado;
-
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("ERROR_IO", ' '+e.toString());
@@ -129,7 +120,6 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
 
     protected void onPostExecute(SoapObject result) {
         try {
-            // Aca debería chequear si llegó bien
             if (result != null){
                 (this.getMethod()).invoke(this.getReferer(), result);
             } else if (this.getErrorCallback() != null){
@@ -137,7 +127,8 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
                 errorMethod.invoke(this.getReferer(), this.getMethodName());
             }
         } catch (Exception e) {
-            Log.e("ERROR", "Error en invocación de método de callback: "+ this.getMethod() + " - ERROR: " + e.getStackTrace());
+            Context context = (Context)this.getReferer();
+            Log.e("ERROR", context.getString(R.string.log_callback_error, this.getMethod(), Arrays.toString(e.getStackTrace())));
         }
     }
 
@@ -146,9 +137,7 @@ public class WSTask extends AsyncTask<Void, Void, SoapObject> {
             this.setMethod(this.getReferer().getClass().getMethod(methodCallback, SoapObject.class));
             this.setErrorCallback(errorMethodCallback);
             this.execute();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
+        } catch (SecurityException | NoSuchMethodException e) {
             e.printStackTrace();
         }
     }

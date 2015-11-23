@@ -27,17 +27,10 @@ public class SoapManager {
     public static final String METHOD_GET_CONSIGNA = "getConsigna";
 
     public SoapManager(){
-
-        //Alex - Hago algunos cambios para probar lo de los web services.
-
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(JuegoColaborativo.getInstance());
-        //String server = preferences.getString("serverURL", "http://192.168.0.1");
         String server = preferences.getString("serverURL", "http://192.168.0.2");
         String port = preferences.getString("serverPort", "8080");
-
         this.setNamespace(server + ":" + port + "/app_dev.php/ws/web_services");
-
-        //this.setUrl(this.getNamespace() + "WSJuegoColaborativo.php?wsdl");
         this.setUrl(this.getNamespace() + "?wsdl");
     }
 
@@ -56,4 +49,5 @@ public class SoapManager {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

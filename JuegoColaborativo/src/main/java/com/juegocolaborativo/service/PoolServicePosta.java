@@ -24,20 +24,16 @@ public class PoolServicePosta extends Service{
     @Override
     public void onCreate() {
         super.onCreate();
-
         _startService();
-
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         _shutdownService();
     }
 
     private void _startService() {
-
         TimerTask asynchronousTask;
         final Handler handler = new Handler();
         asynchronousTask = new TimerTask() {
@@ -54,7 +50,6 @@ public class PoolServicePosta extends Service{
                 });
             }
         };
-
         timer.scheduleAtFixedRate(asynchronousTask, DELAY_INTERVAL, UPDATE_INTERVAL);
     }
 
@@ -64,7 +59,7 @@ public class PoolServicePosta extends Service{
         }
     }
     private void doServiceWork() {
-        // Llamar al WS
+        /* Llama al WS. */
         ((JuegoColaborativo) getApplication()).esperarTurnoJuego();
     }
 

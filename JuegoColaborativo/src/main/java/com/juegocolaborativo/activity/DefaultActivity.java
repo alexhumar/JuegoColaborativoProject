@@ -1,9 +1,6 @@
 package com.juegocolaborativo.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,11 +9,7 @@ import com.juegocolaborativo.JuegoColaborativo;
 import com.juegocolaborativo.R;
 import com.juegocolaborativo.adapter.ResultadosAdapter;
 import com.juegocolaborativo.messages.MessagesManager;
-import com.juegocolaborativo.model.PiezaARecolectar;
 
-/**
- * Created by drapetti on 18/12/13.
- */
 public class DefaultActivity extends Activity {
 
     private ResultadosAdapter resultadosAdapter;
@@ -52,38 +45,45 @@ public class DefaultActivity extends Activity {
         this.getMessagesManager().showDialogInfo(idString);
     }
 
+    /**
+     * Retorna si un determinado id de string se esta mostrando en un process dialog
+     */
+    public boolean isShowing(Integer idString){
+        return (idString.equals(this.getMessagesManager().getIdProgressDialogMostrandose()));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        this.messagesManager = new MessagesManager(this);
+        this.setMessagesManager(new MessagesManager(this));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Seteo la actividad que se está ejecutando en la aplicación
+        /* Seteo la activity que se está ejecutando en la aplicación. */
         ((JuegoColaborativo) getApplication()).setCurrentActivity(this);
     }
 
     @Override
     public void onBackPressed() {
-        return;
+        //return;
     }
 
     public void removerPuntoInicial(){}
 
-    public void addPiezasARecolectarToMap(PiezaARecolectar pieza){}
+    //public void addPiezasARecolectarToMap(PiezaARecolectar pieza){}
 
     public void removeProximityAlert(String intentAction){}
 
-    public void markerVisitado(Integer id){}
+    //public void markerVisitado(Integer id){}
 
     public void removerPuntoFinal(){}
 
     public void enviarMsjConsultaRespondida(){
-        //si vuelvo de responder una consulta, mostrar mensaje
+        /* Si vuelvo de responder una consulta, mostrar mensaje. */
         if ((((JuegoColaborativo) getApplication()).getSubgrupo().getConsultaActual() != null) && (((JuegoColaborativo) getApplication()).getSubgrupo().getConsultaActual().getRespondida() == 1)){
-            //borro la consulta actual porque ya fue respondida
+            /* Borro la consulta actual porque ya fue respondida. */
             ((JuegoColaborativo) getApplication()).getSubgrupo().setConsultaActual(null);
             showDialogInfo(R.string.dialog_respuesta_enviada);
         }
@@ -99,15 +99,16 @@ public class DefaultActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        /* Handle action bar item clicks here. The action bar will
+           automatically handle clicks on the Home/Up button, so long
+           as you specify a parent activity in AndroidManifest.xml. */
         switch (item.getItemId()) {
             case R.id.menu_settings:
                 Intent i = new Intent(this, SetPreferenceActivity.class);
                 startActivityForResult(i, 1);
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

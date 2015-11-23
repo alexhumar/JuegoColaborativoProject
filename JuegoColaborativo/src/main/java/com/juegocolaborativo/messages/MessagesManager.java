@@ -7,9 +7,6 @@ import android.content.DialogInterface;
 
 import com.juegocolaborativo.R;
 
-/**
- * Created by JoseGabriel on 19/11/2015.
- */
 public class MessagesManager {
     private AlertDialog cartelMostrandose;
 
@@ -83,7 +80,7 @@ public class MessagesManager {
 
     public void showProgressDialog(int idString){
 
-        if((this.getProgressDialogMostrandose() == null) || ((this.getProgressDialogMostrandose() != null) && (this.getIdProgressDialogMostrandose() != idString))){
+        if((this.getProgressDialogMostrandose() == null) || (this.getIdProgressDialogMostrandose() != idString)){
             String msg = this.getActivity().getString(idString);
 
             this.closeDialog();
@@ -99,7 +96,7 @@ public class MessagesManager {
     }
 
     private void showDialog(int idContent, int idTitle, int idButton, String... mensajes){
-        if((this.getCartelMostrandose() == null) || ((this.getCartelMostrandose() != null) && (this.getIdCartelMostrandose() != idContent))){
+        if((this.getCartelMostrandose() == null) || (this.getIdCartelMostrandose() != idContent)){
             this.closeDialog();
             this.closeProgressDialog();
 

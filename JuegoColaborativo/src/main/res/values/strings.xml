@@ -57,6 +57,20 @@
     <string name="dialog_consigna_respondida">Has respondido la consigna! Ahora ve al punto siguiente!</string>
     <string name="dialog_enviando_respuesta">Enviando respuesta</string>
     <string name="dialog_enviando_consulta">Enviando consulta</string>
+    <string name="dialog_si">SI</string>
+    <string name="dialog_no">NO</string>
+
+    <string name="log_callback_error">Error en invocación de método de callback: %1$s - ERROR: %2$s</string>
 
     <string name="toast_ingresar_subgrupo">Por favor, ingrese un subgrupo</string>
+    <string name="toast_justificacion_respuesta">Por favor, ingrese la justificación de su respuesta</string>
+
+    <string name="form_cumpleconsulta_respuesta">Cumple: %1$s</string>
+    <string name="form_descripcionconsulta_respuesta">Justificación: %1$s</string>
+
+    <string name="form_justificacion_decision">Por favor, ingrese la justificación de su respuesta</string>
+    <string name="form_justificacion_consulta">Por favor, ingrese la justificación de su respuesta</string>
+
+    <string name="list_cumple_resulado">%1$s</string>
+    <string name="item_respuesta_resulado">Esperando Respuesta</string>
 </resources>

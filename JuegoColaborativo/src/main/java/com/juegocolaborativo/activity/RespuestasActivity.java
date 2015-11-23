@@ -23,7 +23,6 @@ public class RespuestasActivity extends DefaultActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_respuestas);
-
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -31,18 +30,13 @@ public class RespuestasActivity extends DefaultActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
+        /* Inflate the menu; this adds items to the action bar if it is present. */
         getMenuInflater().inflate(R.menu.pieza, menu);
         return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -52,21 +46,14 @@ public class RespuestasActivity extends DefaultActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_respuestas, container, false);
-
-            //por cada subgrupo conocido generar una entrada en la lista
+            /* Por cada subgrupo conocido generar una entrada en la lista. */
             JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
-
-            //creo el adapter custom) y lo asocio con el layout custom
-
+            /* Creo el adapter custom) y lo asocio con el layout custom. */
             RespuestasActivity currentActivity = ((RespuestasActivity) this.getActivity());
             currentActivity.setRespuestasView((ListView) rootView.findViewById(R.id.listaRespuestas));
-
-            ArrayList<Respuesta> arrayRespuestas = new ArrayList<Respuesta>(app.getSubgrupo().getRespuestas().values());
-
+            ArrayList<Respuesta> arrayRespuestas = new ArrayList<>(app.getSubgrupo().getRespuestas().values());
             currentActivity.setResultadosAdapter(new ResultadosAdapter(this.getActivity(), arrayRespuestas));
-
             currentActivity.getRespuestasView().setAdapter(currentActivity.getResultadosAdapter());
-
             final View buttonTomarDecision = rootView.findViewById(R.id.tomarDecision);
             buttonTomarDecision.setOnClickListener(
                     new View.OnClickListener() {
@@ -76,6 +63,7 @@ public class RespuestasActivity extends DefaultActivity {
                         }
                     }
             );
+
             return rootView;
         }
     }
@@ -93,5 +81,4 @@ public class RespuestasActivity extends DefaultActivity {
     public void setRespuestasView(ListView respuestasView) {
         this.respuestasView = respuestasView;
     }
-
 }
