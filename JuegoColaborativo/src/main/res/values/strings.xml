@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Juego colaborativo</string>
     <string name="welcome">Bienvenidos!</string>
     <string name="label_subgrupo">Subgrupo :</string>
@@ -34,17 +33,14 @@
     <string name="serverurl">URL del servidor</string>
     <string name="serverport">Puerto del servidor</string>
     <string name="menu_settings">Settings</string>
-
     <!-- Internacionalizacion de dialogos -->
-
     <string name="button_aceptar">Aceptar</string>
     <string name="button_cerrar">Cerrar</string>
-
     <string name="dialog_info">Informacion</string>
     <string name="dialog_error">Error</string>
     <string name="dialog_mensaje_error_tarea">Error en la tarea %1$s</string>
     <string name="dialog_verificando">Verificando</string>
-    <string name="dialog_esperando_subgrupos">Esperando a los demas subgrupos...</string>
+    <string name="dialog_esperando_subgrupos">Esperando a los demas subgrupos&#8230;</string>
     <string name="dialog_llegada_posta_asignada">Felicitaciones, has llegado al poi asignado! Espera tu turno!</string>
     <string name="dialog_llegada_posta_siguiente">Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos</string>
     <string name="dialog_consulta_respondida_incial">Has respondido la consulta! Sigue esperando tu turno.</string>
@@ -59,18 +55,25 @@
     <string name="dialog_enviando_consulta">Enviando consulta</string>
     <string name="dialog_si">SI</string>
     <string name="dialog_no">NO</string>
-
     <string name="log_callback_error">Error en invocación de método de callback: %1$s - ERROR: %2$s</string>
-
     <string name="toast_ingresar_subgrupo">Por favor, ingrese un subgrupo</string>
     <string name="toast_justificacion_respuesta">Por favor, ingrese la justificación de su respuesta</string>
-
     <string name="form_cumpleconsulta_respuesta">Cumple: %1$s</string>
     <string name="form_descripcionconsulta_respuesta">Justificación: %1$s</string>
-
     <string name="form_justificacion_decision">Por favor, ingrese la justificación de su respuesta</string>
     <string name="form_justificacion_consulta">Por favor, ingrese la justificación de su respuesta</string>
-
     <string name="list_cumple_resulado">%1$s</string>
     <string name="item_respuesta_resulado">Esperando Respuesta</string>
+    <string name="fragment_login_button_comenzar">Comenzar</string>
+    <string name="fragment_login_image">Imagen login</string>
+    <string name="fragment_pieza_respuesta_si">SI</string>
+    <string name="fragment_pieza_respuesta_no">NO</string>
+    <string name="fragment_pieza_land_respuesta_si">SI</string>
+    <string name="fragment_pieza_land_respuesta_no">NO</string>
+    <string name="fragment_responder_respuesta_si">SI</string>
+    <string name="fragment_responder_respuesta_no">NO</string>
+    <string name="fragment_responder_land_respuesta_si">SI</string>
+    <string name="fragment_responder_land_respuesta_no">NO</string>
+    <string name="list_item_subgrupo_image">Imagen item subgrupo</string>
+    <string name="rowlayout_image">Imagen respuesta</string>
 </resources>

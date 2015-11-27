@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,68 +15,70 @@
         android:id="@+id/titulo"
         android:layout_marginTop="10dp"
         style="@style/tituloActivity"/>
-    <!-- Alex - android:layout_below="@+id/linearLayout" ese atributo estaba mal. No existe tal ID. Lo saqué. -->
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/consigna"
         android:id="@+id/consigna"
-        android:layout_below="@+id/titulo"
+        android:layout_below="@id/titulo"
         android:layout_marginTop="20dp"
         style="@style/tituloConsigna"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tituloConsigna"
-        android:layout_alignTop="@+id/consigna"
-        android:layout_toRightOf="@+id/consigna"
+        android:layout_alignTop="@id/consigna"
+        android:layout_toEndOf="@id/consigna"
+        android:layout_toRightOf="@id/consigna"
         style="@style/nombreTituloConsigna"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/descripcionConsigna"
-        android:layout_below="@+id/consigna"
+        android:layout_below="@id/consigna"
         style="@style/descripcion"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/pieza"
         android:id="@+id/pieza"
-        android:layout_below="@+id/descripcionConsigna"
+        android:layout_below="@id/descripcionConsigna"
         android:layout_marginTop="20dp"
         style="@style/tituloPieza"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/tituloPieza"
-        android:layout_alignTop="@+id/pieza"
-        android:layout_toRightOf="@+id/pieza"
+        android:layout_alignTop="@id/pieza"
+        android:layout_toEndOf="@id/pieza"
+        android:layout_toRightOf="@id/pieza"
         android:layout_centerHorizontal="true"
         style="@style/nombreTituloPieza"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/descripcionPieza"
-        android:layout_below="@+id/pieza"
+        android:layout_below="@id/pieza"
         style="@style/descripcion"/>
 
     <ToggleButton
         android:id="@+id/respuestaDecision"
-        android:textOn="SI"
-        android:textOff="NO"
+        android:textOn="@string/fragment_pieza_respuesta_si"
+        android:textOff="@string/fragment_pieza_respuesta_no"
         android:checked="false"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
         style="@style/buttonDecision"
-        android:layout_below="@+id/descripcionPieza"
-        android:layout_toRightOf="@+id/button_responder" />
+        android:layout_below="@id/descripcionPieza" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/respuesta_decision"
         android:id="@+id/tituloRespuesta"
-        android:layout_alignTop="@+id/respuestaDecision"
-        android:layout_toLeftOf="@+id/respuestaDecision"
+        android:layout_alignTop="@id/respuestaDecision"
+        android:layout_toStartOf="@id/respuestaDecision"
+        android:layout_toLeftOf="@id/respuestaDecision"
         style="@style/tituloRespuesta"
         android:layout_above="@id/tituloRespuesta" />
 
@@ -86,36 +89,37 @@
         android:layout_marginTop="10dp" />
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="100dp"
         android:text="@string/enviar"
         android:id="@+id/button_enviar"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_below="@+id/justificacion"
+        android:layout_below="@id/justificacion"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true" />
 
     <Button
-        android:layout_width="250dp"
+        android:layout_width="170dp"
         android:layout_height="100dp"
         android:text="@string/consultar"
         android:id="@+id/button_consultar"
         android:background="@drawable/rustic_button"
         style="@style/button"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/respuestaDecision"
-        android:layout_alignTop="@+id/button_enviar"
-        android:layout_alignLeft="@+id/tituloPieza" />
+        android:layout_alignEnd="@id/respuestaDecision"
+        android:layout_alignRight="@id/respuestaDecision"
+        android:layout_alignTop="@id/button_enviar" />
 
     <Button
-        android:layout_width="250dp"
+        android:layout_width="170dp"
         android:layout_height="100dp"
         android:text="@string/respuestas"
         android:id="@+id/button_respuestas"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_below="@+id/justificacion"
-        android:layout_alignLeft="@+id/button_consultar" />
-
-
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/justificacion"
+        android:layout_alignEnd="@id/respuestaDecision"
+        android:layout_alignRight="@id/respuestaDecision" />
 </RelativeLayout>

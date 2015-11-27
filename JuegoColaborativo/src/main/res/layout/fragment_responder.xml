@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,27 +15,29 @@
         android:id="@+id/titulo"
         style="@style/tituloActivity"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/consigna"
         android:id="@+id/consigna"
-        android:layout_below="@+id/titulo"
+        android:layout_below="@id/titulo"
         android:layout_marginTop="20dp"
         style="@style/tituloConsigna"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tituloConsigna"
-        android:layout_alignTop="@+id/consigna"
-        android:layout_toRightOf="@+id/consigna"
+        android:layout_alignTop="@id/consigna"
+        android:layout_toEndOf="@id/consigna"
+        android:layout_toRightOf="@id/consigna"
         style="@style/nombreTituloConsigna"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/descripcionConsigna"
-        android:layout_below="@+id/consigna"
+        android:layout_below="@id/consigna"
         style="@style/descripcion"/>
 
     <TextView
@@ -42,76 +45,79 @@
         android:text="@string/pieza"
         android:id="@+id/pieza"
         style="@style/tituloPieza"
-        android:layout_below="@+id/descripcionConsigna"
+        android:layout_below="@id/descripcionConsigna"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/tituloPieza"
-        android:layout_alignTop="@+id/pieza"
-        android:layout_toRightOf="@+id/pieza"
+        android:layout_alignTop="@id/pieza"
+        android:layout_toEndOf="@id/pieza"
+        android:layout_toRightOf="@id/pieza"
         android:layout_centerHorizontal="true"
         style="@style/nombreTituloPieza"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/descripcionPieza"
-        android:layout_below="@+id/pieza"
+        android:layout_below="@id/pieza"
         style="@style/descripcion"/>
-
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/respuesta_parcial"
         android:id="@+id/respuesta_parcial"
-        android:layout_below="@+id/descripcionPieza"
+        android:layout_below="@id/descripcionPieza"
         style="@style/tituloConsulta"/>
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/cumpleConsulta"
-        android:layout_below="@+id/respuesta_parcial"
+        android:layout_below="@id/respuesta_parcial"
         style="@style/descripcionConsulta" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/descripcionConsulta"
-        android:layout_below="@+id/cumpleConsulta"
+        android:layout_below="@id/cumpleConsulta"
         style="@style/descripcionConsulta" />
 
     <ToggleButton
         android:id="@+id/respuestaConsulta"
-        android:textOn="SI"
-        android:textOff="NO"
+        android:textOn="@string/fragment_responder_respuesta_si"
+        android:textOff="@string/fragment_responder_respuesta_no"
         android:checked="false"
         style="@style/buttonDecision"
-        android:layout_below="@+id/descripcionConsulta"
+        android:layout_below="@id/descripcionConsulta"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/respuesta_consulta"
         android:id="@+id/tituloRespuesta"
-        android:layout_alignTop="@+id/respuestaConsulta"
+        android:layout_alignTop="@id/respuestaConsulta"
         style="@style/tituloRespuesta"
-        android:layout_above="@+id/tituloRespuesta"
-        android:layout_toLeftOf="@+id/respuestaConsulta" />
+        android:layout_toStartOf="@id/respuestaConsulta"
+        android:layout_toLeftOf="@id/respuestaConsulta" />
 
     <EditText
         android:id="@+id/justificacion"
         style="@style/editText"
-        android:layout_below="@+id/respuestaConsulta"
+        android:layout_below="@id/respuestaConsulta"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true" />
 
     <Button
-        android:layout_width="150dp"
+        android:layout_width="170dp"
         android:layout_height="100dp"
         android:text="@string/responder"
         android:id="@+id/button_responder"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_below="@+id/justificacion"
+        android:layout_below="@id/justificacion"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/consigna" />
-
+        android:layout_toEndOf="@id/consigna"
+        android:layout_toRightOf="@id/consigna" />
 </RelativeLayout>

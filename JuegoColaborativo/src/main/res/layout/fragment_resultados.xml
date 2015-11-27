@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,27 +13,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/titulo_activity_resultados"
         android:id="@+id/titulo"
-        android:layout_below="@+id/linearLayout"
         android:layout_marginTop="10dp"
-        style="@style/tituloActivity"/>
+        style="@style/tituloActivity" />
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titulo" />
+        android:layout_below="@id/titulo" />
 
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/titulo_resultados_subgrupo"
-        android:layout_below="@+id/listView"
+        android:layout_below="@id/listView"
         android:id="@+id/tituloSubgrupo"
         android:layout_marginTop="10dp"
-        style="@style/tituloActivity"/>
+        style="@style/tituloActivity" />
 
     <ListView
         android:id="@+id/listViewSugbrupo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tituloSubgrupo" />
+        android:layout_below="@id/tituloSubgrupo" />
 </RelativeLayout>

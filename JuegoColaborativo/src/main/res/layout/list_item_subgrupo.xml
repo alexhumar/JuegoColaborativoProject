@@ -26,6 +26,7 @@
         <ImageView
             android:id="@+id/correcta"
             style="@style/rowImagen"
+            android:contentDescription="@string/list_item_subgrupo_image"
             android:layout_weight="1">
         </ImageView>
 

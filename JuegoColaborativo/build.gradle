@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 15
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -16,18 +16,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
 }
 
 repositories {
-    //mavenCentral()
-    //maven { url 'http://ksoap2-android.googlecode.com/svn/m2-repo' }
     maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.android.gms:play-services:4.0.30'
     compile 'com.google.code.ksoap2-android:ksoap2-android:3.0.0'
 }
