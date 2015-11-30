@@ -89,7 +89,7 @@
         android:layout_marginTop="10dp" />
 
     <Button
-        android:layout_width="170dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         android:text="@string/enviar"
         android:id="@+id/button_enviar"
@@ -100,25 +100,23 @@
         android:layout_alignParentLeft="true" />
 
     <Button
-        android:layout_width="170dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         android:text="@string/consultar"
         android:id="@+id/button_consultar"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_alignParentBottom="true"
         android:layout_alignEnd="@id/respuestaDecision"
         android:layout_alignRight="@id/respuestaDecision"
         android:layout_alignTop="@id/button_enviar" />
 
     <Button
-        android:layout_width="170dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
         android:text="@string/respuestas"
         android:id="@+id/button_respuestas"
         android:background="@drawable/rustic_button"
         style="@style/button"
-        android:layout_alignParentBottom="true"
         android:layout_below="@id/justificacion"
         android:layout_alignEnd="@id/respuestaDecision"
         android:layout_alignRight="@id/respuestaDecision" />
