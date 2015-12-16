@@ -116,25 +116,31 @@ public class PiezaActivity extends DefaultActivity {
                             toast.show();
                         } else {
                             JuegoColaborativo app = (JuegoColaborativo) getActivity().getApplication();
-                            /* Seteo el flag del subgrupo esperando rta para mostrar o no el boton. */
-                            buttonConsultar.setVisibility(View.INVISIBLE);
-                            buttonRespuestas.setVisibility(View.VISIBLE);
-                            ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaDecision);
-                            ((PiezaActivity) getActivity()).showProgressDialog(R.string.dialog_enviando_consulta);
-                            int idSubgrupo = app.getSubgrupo().getId();
-                            int idPieza = app.getPiezaActual().getId();
-                            int cumple = respuesta.isChecked() ? 1 : 0;
-                            int decisionFinal = 0;
-                            String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
-                            WSTask decisionTask = new WSTask();
-                            decisionTask.setReferer(getActivity());
-                            decisionTask.setMethodName(SoapManager.METHOD_DECISION_TOMADA);
-                            decisionTask.addStringParameter("idSubgrupo", Integer.toString(idSubgrupo));
-                            decisionTask.addStringParameter("idPieza", Integer.toString(idPieza));
-                            decisionTask.addStringParameter("cumple", Integer.toString(cumple));
-                            decisionTask.addStringParameter("justificacion", justificacion);
-                            decisionTask.addStringParameter("decisionFinal", Integer.toString(decisionFinal));
-                            decisionTask.executeTask("completeConsultaEnviada", "errorConsultaEnviada");
+                            if (app.getSubgrupo().getGrupo().getSubgrupos().size() == 0) {
+                                Toast toast = Toast.makeText(rootView.getContext(), getActivity().getString(R.string.toast_sin_subgrupos), Toast.LENGTH_SHORT);
+                                toast.show();
+                            } else {
+
+                                /* Seteo el flag del subgrupo esperando rta para mostrar o no el boton. */
+                                buttonConsultar.setVisibility(View.INVISIBLE);
+                                buttonRespuestas.setVisibility(View.VISIBLE);
+                                ToggleButton respuesta = (ToggleButton) rootView.findViewById(R.id.respuestaDecision);
+                                ((PiezaActivity) getActivity()).showProgressDialog(R.string.dialog_enviando_consulta);
+                                int idSubgrupo = app.getSubgrupo().getId();
+                                int idPieza = app.getPiezaActual().getId();
+                                int cumple = respuesta.isChecked() ? 1 : 0;
+                                int decisionFinal = 0;
+                                String justificacion = ((TextView) rootView.findViewById(R.id.justificacion)).getText().toString();
+                                WSTask decisionTask = new WSTask();
+                                decisionTask.setReferer(getActivity());
+                                decisionTask.setMethodName(SoapManager.METHOD_DECISION_TOMADA);
+                                decisionTask.addStringParameter("idSubgrupo", Integer.toString(idSubgrupo));
+                                decisionTask.addStringParameter("idPieza", Integer.toString(idPieza));
+                                decisionTask.addStringParameter("cumple", Integer.toString(cumple));
+                                decisionTask.addStringParameter("justificacion", justificacion);
+                                decisionTask.addStringParameter("decisionFinal", Integer.toString(decisionFinal));
+                                decisionTask.executeTask("completeConsultaEnviada", "errorConsultaEnviada");
+                            }
                         }
                     }
                 }

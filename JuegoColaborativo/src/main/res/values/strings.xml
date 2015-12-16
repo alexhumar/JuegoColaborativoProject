@@ -58,6 +58,7 @@
     <string name="log_callback_error">Error en invocación de método de callback: %1$s - ERROR: %2$s</string>
     <string name="toast_ingresar_subgrupo">Por favor, ingrese un subgrupo</string>
     <string name="toast_justificacion_respuesta">Por favor, ingrese la justificación de su respuesta</string>
+    <string name="toast_sin_subgrupos">No hay subgrupos en el grupo a quien consultar</string>
     <string name="form_cumpleconsulta_respuesta">Cumple: %1$s</string>
     <string name="form_descripcionconsulta_respuesta">Justificación: %1$s</string>
     <string name="form_justificacion_decision">Por favor, ingrese la justificación de su respuesta</string>
