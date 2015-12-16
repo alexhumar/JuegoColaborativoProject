@@ -31,7 +31,7 @@ public class ResultadoFinal implements Comparable<ResultadoFinal> {
 	public int compareTo(ResultadoFinal compareResultadoFinal) {
 		int compareResultado = ((ResultadoFinal) compareResultadoFinal).getPuntaje(); 
 		 
-		return compareResultado - this.getPuntaje();
+		return (compareResultado == this.getPuntaje()) ? 1 : (compareResultado - this.getPuntaje());
 	}
 
 }
