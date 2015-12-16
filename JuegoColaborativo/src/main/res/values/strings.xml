@@ -44,7 +44,7 @@
     <string name="dialog_llegada_posta_asignada">Felicitaciones, has llegado al poi asignado! Espera tu turno!</string>
     <string name="dialog_llegada_posta_siguiente">Has llegado a la Posta siguiente! Puedes seguir respondiendo las consultas de los demas subgrupos</string>
     <string name="dialog_consulta_respondida_incial">Has respondido la consulta! Sigue esperando tu turno.</string>
-    <string name="dialog_consulta_respondida_final">Has respondido la consulta! Espera el fin del juego.</string>
+    <string name="dialog_consulta_respondida_final">Has respondido la consigna! Espera el fin del juego.</string>
     <string name="dialog_respuesta_enviada">Se envió la respuesta al subgrupo, gracias!</string>
     <string name="dialog_notificacion_turno">Es tu turno! Comienza el juego!</string>
     <string name="dialog_juego_terminado">Juego terminado! Ahora espera los resultados!</string>
